@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Gaegu, JetBrains_Mono } from "next/font/google";
-import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
+import localFont from "next/font/local";
 
 import { Providers } from "@/shared/api/providers";
 
@@ -10,6 +10,13 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   weight: ["500"],
+});
+
+// 본문 글꼴. Pretendard에서 사이트에 쓰인 글자만 담은 서브셋 1개(scripts/subset-font.sh) — 분할 파일 26개를 받던 것을 줄임
+const scanSans = localFont({
+  src: "../styles/fonts/ScanSans.woff2",
+  variable: "--font-scan-sans",
+  weight: "45 930",
 });
 
 // 01 GAP 현장 말투 손글씨. 한글 글리프가 커서 미리 로드하지 않는다.
@@ -30,7 +37,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className={`${jetbrainsMono.variable} ${gaegu.variable} h-full antialiased`}>
+    <html lang="ko" className={`${scanSans.variable} ${jetbrainsMono.variable} ${gaegu.variable} h-full antialiased`}>
       <body className="min-h-full">
         <Providers>{children}</Providers>
       </body>

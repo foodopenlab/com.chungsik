@@ -2,7 +2,7 @@
 @import "../styles/tokens.css";
 
 @theme inline {
-  --font-sans: "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  --font-sans: var(--font-scan-sans), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
   --font-hand: var(--font-gaegu), cursive;
 }

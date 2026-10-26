@@ -1,3 +1,16 @@
+## [v0.5.8] - 2026-10-27
+
+### Fixed
+- 모바일 Lighthouse 점수가 75~99로 오르내리던 것: 첫 화면에서 Pretendard 분할 폰트 26개(574KB)를 받다가, 그 파일들이 첫 페인트 전에 끝난 회차마다 Lighthouse가 LCP 의존으로 계산해 점수가 떨어짐(실제 브라우저 LCP는 느린 휴대폰 조건에서도 1.4초로 일정). 사이트에 쓰인 글자만 담은 서브셋 1개(110KB)로 바꿈 — 같은 조건 로컬 측정 70 → 87
+
+### Added
+- 본문 글꼴 `Scan Sans`(`src/styles/fonts/ScanSans.woff2`, `next/font/local`): Pretendard 가변 폰트 서브셋. Pretendard는 OFL 1.1 + 예약 글꼴 이름이라 수정본은 다른 이름, 저작권 표기·라이선스는 `OFL.txt`로 함께 둠
+- `scripts/subset-font.sh`: src의 .ts/.tsx(픽스처 = 실 DB 데이터 포함)에서 글자를 모아 서브셋 생성(fonttools)
+- `scanSans.test.ts`: 사이트에 쓰인 글자가 서브셋에 모두 있는지 고정 — 새 글자가 생기면 실패하므로 스크립트를 다시 실행
+
+### Removed
+- `pretendard` 분할 CSS import(패키지는 서브셋 원본으로 유지)
+
 ## [v0.5.7] - 2026-10-26
 
 ### Fixed
