@@ -1,6 +1,6 @@
 # HANDOFF — 남은 작업
 
-최종 갱신: 2026-10-26 · 브랜치 `feat/scan-site` (main은 운영 배포 브랜치 — main 푸시 = 프론트 운영 배포)
+최종 갱신: 2026-10-26 · 운영 https://www.chungsik.com (main 푸시 = 운영 배포) · 작업 브랜치 `feat/scan-site` 푸시 = Vercel 미리보기
 
 ## 지금 상태
 
@@ -21,8 +21,8 @@
 
 ## 남은 작업 (우선순위 순)
 
-1. **커밋** — 02 TRANSLATE 3D 스크럽, "스캔 시작" 자동 스크롤, `shared/motion` 승격이 아직 미커밋
-2. **Vercel 미리보기 배포** — `feat/scan-site` 푸시 → Vercel 프로젝트 Root Directory = `frontend`. mock API가 Next 라우트로 들어 있어 백엔드 없이 전체 동작. 실제 휴대폰에서 3D·영상·자석 정지 확인
+1. ~~커밋~~ · ~~Vercel 배포~~ · ~~도메인~~ — 완료. Vercel Root Directory = `frontend`, 도메인 가비아 DNS(루트 A, www CNAME — 값은 Vercel Domains 화면 기준), 운영은 mock API로 동작
+2. **실제 휴대폰 확인** — 3D·영상·자석 정지
 3. **Lighthouse·모바일 점검** (지시서 목표: 모바일 Perf 85+, A11y 95+)
    - 문구·숫자를 전부 클라이언트에서 불러온다 → LCP·검색 노출 불리. 측정 후 필요하면 서버 프리페치(HydrationBoundary)로
    - 모바일 HERO 막대 차트 밀도가 고르지 않음(점 1/3 + 막대 폭 축소)

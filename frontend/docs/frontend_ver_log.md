@@ -1,3 +1,9 @@
+## [v0.4.2] - 2026-10-26
+
+### Changed
+- 탭 제목·메타데이터 title을 HERO 제목에 맞춤: "김충식 — 현장의 말을 개발의 말로"
+- 운영 배포: Vercel(Root Directory `frontend`) + 도메인 www.chungsik.com(가비아 DNS, chungsik.com → www 308, Let's Encrypt)
+
 ## [v0.4.1] - 2026-10-26
 
 ### Added

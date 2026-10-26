@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 const gaegu = Gaegu({ variable: "--font-gaegu", subsets: ["latin"], weight: ["400"], preload: false });
 
 export const metadata: Metadata = {
-  title: "김충식 — 아날로그 현장을 데이터로",
+  title: "김충식 — 현장의 말을 개발의 말로",
   description: "식품기술사 · 현장 10년 5개월 · Forward Deployed Engineer",
 };
 
