@@ -105,15 +105,13 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 ## 8. 남은 작업 (우선순위 순)
 
 1. ~~**OG·공유 메타**~~ — 완료(v0.4.3). 이미지 교체는 `frontend/src/app/opengraph-image.jpg`(1200×630)를 같은 이름으로 바꾸면 됨
-2. **Lighthouse·모바일 점검** (지시서 목표: 모바일 Perf 85+, A11y 95+) — 운영 URL로 측정
-   - 문구·숫자를 전부 클라이언트에서 불러옴 → LCP·검색 노출 불리. 필요하면 서버 프리페치(HydrationBoundary)
-   - 모바일 HERO 막대 차트 밀도가 고르지 않음(점 1/3 + 막대 폭 축소)
+2. ~~**Lighthouse·모바일 점검**~~ — 완료(2026-10-26, 운영 URL). 모바일 성능 72→**98**(LCP 8.1→2.4s, CLS 0.084→0.001), 접근성·권장사항·SEO 100. 데스크톱 99. 남은 관찰: 모바일 HERO 막대 차트 밀도가 고르지 않음(점 1/3 + 막대 폭 축소), 02 TRANSLATE는 3D 캔버스(`ssr:false`) 때문에 서버 HTML에서 빈자리
 3. **실제 휴대폰 확인** — 3D·영상·자석 정지·자동 스크롤
 4. **07 클로징 연출** — 스캔 라인이 한 번 더 지나가며 점구름 → 실사 복귀. CLOSING 영상 `public/video/closing.*` 준비됨(지금은 포스터 정지)
 5. **Metabole 상태 태그** — 10/27 밤 AWS 운영 종료 예정 → 이후 `배포 중 · 10/27 종료 예정`을 종료 표기로(새 마이그레이션 + `fixtures.built.ts`), 서비스 링크 처리도 결정
 6. **번역 오브젝트 텍스처 교체** — 임시본. `blender/textures/*.png`를 같은 이름으로 바꾸고 `blender -b --python blender/scripts/build_objects.py` → `public/models/obj-*.glb` 갱신
 7. **TownPulse 지도·AI 채팅 장면** — 로그인 필요라 공개 화면만 녹화됨. 사용자가 직접 녹화해 `frontend/public/video/raw/`에 넣으면 편집·압축·교체
-8. **실 API 전환 (진행 중)** — 사용자 결정: mock 운영 안 함. 백엔드는 루트 `docker-compose.yml`로 운영 중(`chungsik-db`·`chungsik-api`, CORS에 운영 도메인 포함). 남은 것: ① ~~네임서버 가비아→Cloudflare~~ 완료(DNS only 회색 구름: `@` A 216.198.79.1, `www` CNAME Vercel) ② ~~터널 `chungsik`~~ 완료(`chungsik-cloudflared`, api.chungsik.com → backend:8700) ③ ~~HERO 제목 서버 프리페치~~ 완료(v0.5.0, `features/hero/components/HeroPrefetch.tsx`) ④ Vercel `NEXT_PUBLIC_API_BASE=https://api.chungsik.com/api/v1` 후 재배포
+8. ~~**실 API 전환**~~ — 완료(2026-10-26). 운영은 `https://api.chungsik.com/api/v1`(Vercel Production env `NEXT_PUBLIC_API_BASE`, Config 타입). Preview는 CORS 밖이라 mock. 구성: chungsik.com DNS는 Cloudflare(가비아는 등록만, `@`·`www`는 DNS only 회색 구름), 터널 `chungsik`(토큰은 루트 `.env`) → `backend:8700`. 이 서버의 로컬 DNS 캐시가 늦게 갱신되면 Playwright/Lighthouse에 `--host-resolver-rules="MAP api.chungsik.com <IP>"`
 9. **적대적 리뷰** — "채용 담당자로서 과장으로 보이는 지점 5개, 팀 성과를 개인처럼 쓴 곳, 면접에서 바로 물을 약점"
 10. **소소한 것** — 상단 진행 바는 페이지 끝에서 100%(지시서는 06 도달 시 100%) · 숫자 고정폭 글꼴 공백(`15건  미만`) · 02 ④ 계산 격자 점이 흐리면 간격·크기 키우기
 
