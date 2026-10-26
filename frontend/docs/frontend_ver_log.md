@@ -1,3 +1,13 @@
+## [v0.5.0] - 2026-10-26
+
+### Added
+- `HeroPrefetch`(서버 컴포넌트): HERO profile을 서버에서 미리 받아 첫 HTML에 제목·부제를 넣음(`"use cache"` + `cacheLife("minutes")`, 1분 안팎으로 DB 변경 반영). 백엔드가 꺼져 있거나 apiBase가 상대 주소면 기존처럼 브라우저에서 불러옴
+  - 근거: 운영 모바일 Lighthouse 성능 72, LCP 8.1s — LCP 요소가 h1인데 클라이언트 fetch 뒤에야 채워짐(서버 HTML의 h1이 비어 있음), CLS 0.084도 같은 원인
+
+### Changed
+- `HeroSection`이 `serverProfile` prop을 받음. 있으면 `useProfile`을 끔(`useProfile(enabled)`)
+- React Query 캐시(HydrationBoundary)로 넘기지 않음 — 데이터가 있으면 useQuery가 프리렌더 중 현재 시각을 읽어 Suspense 섹션 전체가 빈자리가 되는 것을 실측으로 확인
+
 ## [v0.4.3] - 2026-10-26
 
 ### Added

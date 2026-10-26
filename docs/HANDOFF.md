@@ -113,7 +113,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 5. **Metabole 상태 태그** — 10/27 밤 AWS 운영 종료 예정 → 이후 `배포 중 · 10/27 종료 예정`을 종료 표기로(새 마이그레이션 + `fixtures.built.ts`), 서비스 링크 처리도 결정
 6. **번역 오브젝트 텍스처 교체** — 임시본. `blender/textures/*.png`를 같은 이름으로 바꾸고 `blender -b --python blender/scripts/build_objects.py` → `public/models/obj-*.glb` 갱신
 7. **TownPulse 지도·AI 채팅 장면** — 로그인 필요라 공개 화면만 녹화됨. 사용자가 직접 녹화해 `frontend/public/video/raw/`에 넣으면 편집·압축·교체
-8. **실 API 전환 (진행 중)** — 사용자 결정: mock 운영 안 함. 백엔드는 루트 `docker-compose.yml`로 운영 중(`chungsik-db`·`chungsik-api`, CORS에 운영 도메인 포함). 남은 것: ① chungsik.com 네임서버 가비아→Cloudflare(사용자) ② Zero Trust에서 터널 `chungsik` 만들고 토큰을 루트 `.env` `TUNNEL_TOKEN`에, Public Hostname `api.chungsik.com` → `http://backend:8700` → `docker compose --profile tunnel up -d` ③ HERO 제목 서버 프리페치(모바일 LCP 8.1s의 원인 — h1이 클라이언트 fetch 뒤에야 그려짐) ④ Vercel `NEXT_PUBLIC_API_BASE=https://api.chungsik.com/api/v1` 후 재배포
+8. **실 API 전환 (진행 중)** — 사용자 결정: mock 운영 안 함. 백엔드는 루트 `docker-compose.yml`로 운영 중(`chungsik-db`·`chungsik-api`, CORS에 운영 도메인 포함). 남은 것: ① ~~네임서버 가비아→Cloudflare~~ 완료(DNS only 회색 구름: `@` A 216.198.79.1, `www` CNAME Vercel) ② ~~터널 `chungsik`~~ 완료(`chungsik-cloudflared`, api.chungsik.com → backend:8700) ③ ~~HERO 제목 서버 프리페치~~ 완료(v0.5.0, `features/hero/components/HeroPrefetch.tsx`) ④ Vercel `NEXT_PUBLIC_API_BASE=https://api.chungsik.com/api/v1` 후 재배포
 9. **적대적 리뷰** — "채용 담당자로서 과장으로 보이는 지점 5개, 팀 성과를 개인처럼 쓴 곳, 면접에서 바로 물을 약점"
 10. **소소한 것** — 상단 진행 바는 페이지 끝에서 100%(지시서는 06 도달 시 100%) · 숫자 고정폭 글꼴 공백(`15건  미만`) · 02 ④ 계산 격자 점이 흐리면 간격·크기 키우기
 
@@ -121,7 +121,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 
 - 실 API와 mock은 같은 데이터여야 한다. **새 Alembic 마이그레이션**(`backend/alembic/versions/00NN_*.py`, downgrade 포함)과 `frontend/src/app/api/mock/fixtures.ts`·`fixtures.built.ts`를 **함께** 고친 뒤 §6 mock=실 API 비교
 - 숫자 추가 = `metric` 행 추가(측정 조건·출처·attribution 필수). 컴포넌트에 숫자를 직접 쓰지 않는다
-- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.6, 프론트 v0.4.3)
+- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.6, 프론트 v0.5.0)
 - 새 BC는 `backend/apps/dummy`를 복사해 시작
 
 ## 10. 자산·파일 위치

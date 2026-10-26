@@ -5,7 +5,7 @@ import { ContactSection } from "@/features/contact/components/ContactSection";
 import { DeploySection } from "@/features/deploy/components/DeploySection";
 import { DictSection } from "@/features/dict/components/DictSection";
 import { GapSection } from "@/features/gap/components/GapSection";
-import { HeroSection } from "@/features/hero/components/HeroSection";
+import { HeroPrefetch } from "@/features/hero/components/HeroPrefetch";
 import { StackSection } from "@/features/stack/components/StackSection";
 import { TranslateSection } from "@/features/translate/components/TranslateSection";
 import { RouteFallback } from "@/shared/ui/RouteFallback";
@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main>
       <Suspense fallback={<RouteFallback />}>
-        <HeroSection />
+        <HeroPrefetch />
       </Suspense>
       <Suspense fallback={<RouteFallback />}>
         <GapSection />

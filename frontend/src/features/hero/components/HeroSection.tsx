@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef, type MouseEvent } from "react";
 
 import { useApiQuery } from "@/shared/api/useApiQuery";
-import type { Metric } from "@/shared/api/types";
+import type { Metric, Profile } from "@/shared/api/types";
 import { useMetricsById } from "@/shared/metrics/useMetricsById";
 import { AttributionBadge } from "@/shared/ui/AttributionBadge";
 import { CountUpText } from "@/shared/ui/CountUpText";
@@ -37,8 +37,9 @@ const CTA = [
   { label: "Docs", href: "#docs" },
 ];
 
-export function HeroSection() {
-  const profile = useProfile();
+export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
+  const clientProfile = useProfile(!serverProfile);
+  const profile = serverProfile ?? clientProfile;
   const metrics = useMetricsById();
   const scan = useScanEnabled();
   const [ref, progress] = useSectionProgress<HTMLElement>();
