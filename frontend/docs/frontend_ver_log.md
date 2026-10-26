@@ -1,3 +1,11 @@
+## [v0.5.7] - 2026-10-26
+
+### Fixed
+- Vercel 중계가 쿼리 붙은 요청(`?아무거나`)마다 CDN 캐시를 우회해 집 서버까지 가던 것: 쿼리가 있으면 404 `RESOURCE_NOT_FOUND`로 막음 + 테스트(사이트는 쿼리를 쓰지 않음)
+
+### Changed
+- 운영 전환 완료: Vercel env `NEXT_PUBLIC_API_BASE=/api/v1` + `API_ORIGIN`·`CF_ACCESS_*`, api.chungsik.com은 Cloudflare Access(서비스 토큰)로 잠금 — 직접 호출 403, 사이트 중계 200 확인
+
 ## [v0.5.6] - 2026-10-26
 
 ### Added

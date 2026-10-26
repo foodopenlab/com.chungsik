@@ -27,6 +27,7 @@ curl --fail --silent --show-error http://127.0.0.1:8700/api/v1/stacks
 2. 설치 화면의 토큰(`eyJ…`)만 복사해 루트 `.env`의 `TUNNEL_TOKEN=`에 넣습니다
 3. Public Hostname: `api.chungsik.com` → Service `HTTP` · `backend:8700` (compose 내부망 서비스명)
 4. `docker compose --profile tunnel up -d`
+5. Cloudflare Access로 잠금(2026-10-26): Zero Trust → Access → 서비스 토큰 `vercel-chungsik` + 애플리케이션 `chungsik-api`(api.chungsik.com) 정책 `vercel only`(Action **Service Auth**, Include Service Token). 토큰 없이 직접 호출하면 403 — 사이트는 Vercel 중계(`/api/v1`)가 토큰을 붙여 부릅니다. 토큰 값은 Vercel env(`CF_ACCESS_CLIENT_ID/SECRET`)에만 둡니다
 
 ## 운영 메모
 

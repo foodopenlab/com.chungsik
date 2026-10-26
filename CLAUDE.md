@@ -498,9 +498,9 @@ frontend/src/
 | 대상 | 배포 방식 | 트리거 |
 |---|---|---|
 | 프론트엔드 | Vercel (Git 연동) | **main 푸시 = 운영 배포** |
-| 백엔드 | 개인 서버 Docker의 FastAPI(8700) → Cloudflare Tunnel로 공개 | 수동 |
+| 백엔드 | 개인 서버 Docker의 FastAPI(8700) → Cloudflare Tunnel(api.chungsik.com, Cloudflare Access로 잠금) | 수동 |
 | DB | 개인 서버 Docker의 PostgreSQL (백엔드와 같은 Docker 네트워크) | — |
 
 - 푸시 전 `git log origin/main..main`으로 나가는 커밋을 확인한다 — 다른 사람 커밋이 섞여 있으면 먼저 묻는다.
-- 프론트의 실 API 전환은 Vercel 환경변수 `NEXT_PUBLIC_API_BASE`에 Tunnel 공개 주소를 넣어서 한다 (§15 — 코드 수정 없이 env로만).
+- 프론트의 실 API 전환은 Vercel 환경변수로만 한다 (§15 — 코드 수정 없이 env로만): `NEXT_PUBLIC_API_BASE=/api/v1`(Vercel 중계 `app/api/v1/[resource]`), 서버 전용 `API_ORIGIN`(Tunnel 주소)·`CF_ACCESS_CLIENT_ID/SECRET`(Access 서비스 토큰). api.chungsik.com은 서비스 토큰 없이는 403이다.
 - AI는 "커밋할까요?"·"푸시할까요?"처럼 커밋·푸시를 묻거나 안내할 때 "main 푸시 = 프론트 운영 배포"를 함께 말한다.

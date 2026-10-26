@@ -2,7 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { GET } from "./route";
 
-const call = (resource: string) => GET(new Request(`http://x/api/v1/${resource}`), { params: Promise.resolve({ resource }) });
+const call = (resource: string, query = "") =>
+  GET(new Request(`http://x/api/v1/${resource}${query}`), { params: Promise.resolve({ resource }) });
 
 describe("GET /api/v1/[resource] — Vercel 중계", () => {
   const upstream = vi.fn();
@@ -37,6 +38,13 @@ describe("GET /api/v1/[resource] — Vercel 중계", () => {
 
   it("목록에 없는 경로는 집 서버에 넘기지 않고 404", async () => {
     const res = await call("openapi.json");
+
+    expect(upstream).not.toHaveBeenCalled();
+    expect([res.status, (await res.json()).error.code]).toEqual([404, "RESOURCE_NOT_FOUND"]);
+  });
+
+  it("쿼리가 붙은 요청은 CDN 캐시를 우회하므로 집 서버에 넘기지 않고 404", async () => {
+    const res = await call("profiles", "?bust=1");
 
     expect(upstream).not.toHaveBeenCalled();
     expect([res.status, (await res.json()).error.code]).toEqual([404, "RESOURCE_NOT_FOUND"]);

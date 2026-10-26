@@ -111,13 +111,14 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 5. **Metabole 상태 태그** — 10/27 밤 AWS 운영 종료 예정 → 이후 `배포 중 · 10/27 종료 예정`을 종료 표기로(새 마이그레이션 + `fixtures.built.ts`), 서비스 링크 처리도 결정
 6. **번역 오브젝트 텍스처 교체** — 임시본. `blender/textures/*.png`를 같은 이름으로 바꾸고 `blender -b --python blender/scripts/build_objects.py` → `public/models/obj-*.glb` 갱신
 7. **TownPulse 지도·AI 채팅 장면** — 로그인 필요라 공개 화면만 녹화됨. 사용자가 직접 녹화해 `frontend/public/video/raw/`에 넣으면 편집·압축·교체
-8. ~~**실 API 전환**~~ — 완료(2026-10-26). 운영은 `https://api.chungsik.com/api/v1`(Vercel Production env `NEXT_PUBLIC_API_BASE`, Config 타입). Preview는 CORS 밖이라 mock. 구성: chungsik.com DNS는 Cloudflare(가비아는 등록만, `@`·`www`는 DNS only 회색 구름), 터널 `chungsik`(토큰은 루트 `.env`) → `backend:8700`. 이 서버의 로컬 DNS 캐시가 늦게 갱신되면 Playwright/Lighthouse에 `--host-resolver-rules="MAP api.chungsik.com <IP>"`
-8-1. **API 비공개(Vercel 중계 + Cloudflare Access)** — 진행 중. 서버에 다른 프로젝트가 많아 api.chungsik.com을 외부에 열어 두지 않기로 함
-   - 1단계 ✅ 중계 코드(v0.5.6): `app/api/v1/[resource]/route.ts`(허용 8종 GET만, CDN 60s 캐시), `shared/api/upstream.ts`(env `API_ORIGIN` + `CF_ACCESS_CLIENT_ID/SECRET`), HERO 서버 미리 불러오기는 중계 없이 직접 호출
-   - 2단계(사용자) Zero Trust 서비스 토큰 `vercel-chungsik` 발급 → 3단계(사용자) Vercel env `API_ORIGIN`·`CF_ACCESS_*`(Sensitive) 추가, `NEXT_PUBLIC_API_BASE=/api/v1`, Production+Preview, Redeploy → 4단계 확인 → 5단계(사용자) Access 앱 `chungsik-api`(api.chungsik.com, 정책 Action `Service Auth` + 서비스 토큰) → 6단계 직접 호출 403 확인
-   - **순서 중요**: 5단계(자물쇠)는 4단계 확인 뒤. 되돌리기 = Access 앱 삭제
-   - 완료 후 CLAUDE.md·AGENTS.md Part VII "NEXT_PUBLIC_API_BASE에 Tunnel 공개 주소" 문구 갱신 필요
-   - 서버 격리 ✅(2026-10-26): 브리지 `br-chungsik` 고정 + ufw 1번 규칙 `deny in on br-chungsik` → 컨테이너에서 호스트 SSH·OCR·Ollama·다른 프로젝트 DB 차단 확인(`backend/docs/deploy.md` 서버 격리). SSH 비밀번호 로그인 끄기는 사용자 선택
+8. ~~**실 API 전환**~~ — 완료(2026-10-26). 지금은 8-1의 중계 구조(Preview도 실 데이터). 구성: chungsik.com DNS는 Cloudflare(가비아는 등록만, `@`·`www`는 DNS only 회색 구름), 터널 `chungsik`(토큰은 루트 `.env`) → `backend:8700`. 이 서버의 로컬 DNS 캐시가 늦게 갱신되면 Playwright/Lighthouse에 `--host-resolver-rules="MAP api.chungsik.com <IP>"`
+8-1. ~~**API 비공개(Vercel 중계 + Cloudflare Access)**~~ — 완료(2026-10-26). 서버에 다른 프로젝트가 많아 api.chungsik.com을 외부에 열지 않음
+   - 흐름: 브라우저 → `www.chungsik.com/api/v1/[resource]`(Vercel 중계, 허용 8종 GET만·쿼리 붙으면 404·CDN 60s) → Access 서비스 토큰 → api.chungsik.com → Tunnel → backend. HERO 서버 미리 불러오기는 `upstreamFetch`로 직접
+   - Vercel env(Production+Preview): `NEXT_PUBLIC_API_BASE=/api/v1`, `API_ORIGIN=https://api.chungsik.com/api/v1`, `CF_ACCESS_CLIENT_ID/SECRET`(Sensitive)
+   - Cloudflare Zero Trust: 서비스 토큰 `vercel-chungsik`(만료 없음), Access 앱 `chungsik-api`(api.chungsik.com 전체) + 정책 `vercel only`(Action Service Auth, Include Service Token). 토큰 없이 직접 호출 → 403 확인
+   - 되돌리기: Access 앱 삭제(즉시) / 중계를 끄려면 `NEXT_PUBLIC_API_BASE`를 Tunnel 주소로 + Redeploy(단, Access가 켜져 있으면 브라우저 직접 호출은 403)
+   - 서버 격리 ✅: 브리지 `br-chungsik` + ufw 1번 `deny in on br-chungsik` → 컨테이너에서 호스트 SSH·OCR·Ollama·다른 프로젝트 DB 차단(`backend/docs/deploy.md` 서버 격리). SSH 비밀번호 로그인 끄기는 사용자 선택
+   - 관찰: 운영 모바일 Lighthouse 5회 99·79·97·76·97 — 느린 회차는 렌더 지연(약 3.9s, TTFB 10ms·HERO는 서버 HTML에 있음). 측정 변동으로 보이나 이전 98은 1회 측정이라 비교 근거 약함 → 소소한 것에서 재확인
 9. **적대적 리뷰** — "채용 담당자로서 과장으로 보이는 지점 5개, 팀 성과를 개인처럼 쓴 곳, 면접에서 바로 물을 약점"
 10. **소소한 것** — 상단 진행 바는 페이지 끝에서 100%(지시서는 06 도달 시 100%) · 숫자 고정폭 글꼴 공백(`15건  미만`) · 02 ④ 계산 격자 점이 흐리면 간격·크기 키우기
 
@@ -125,7 +126,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 
 - 실 API와 mock은 같은 데이터여야 한다. **새 Alembic 마이그레이션**(`backend/alembic/versions/00NN_*.py`, downgrade 포함)과 `frontend/src/app/api/mock/fixtures.ts`·`fixtures.built.ts`를 **함께** 고친 뒤 §6 mock=실 API 비교
 - 숫자 추가 = `metric` 행 추가(측정 조건·출처·attribution 필수). 컴포넌트에 숫자를 직접 쓰지 않는다
-- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.9, 프론트 v0.5.6)
+- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.9, 프론트 v0.5.7)
 - 새 BC는 `backend/apps/dummy`를 복사해 시작
 
 ## 10. 자산·파일 위치
