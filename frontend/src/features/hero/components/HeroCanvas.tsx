@@ -23,16 +23,25 @@ const MOBILE_WIDTH = 768;
 const cssColor = (name: string) =>
   new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue(name).trim());
 
+// 세로 영상(9:16)의 object-position x — HeroSection의 `portrait:object-[80%_50%]`와 같은 값.
+// 게이지 묶음이 영상 오른쪽(1080px 중 340~1020)에 있어 가운데 기준으로 자르면 좁은 화면에서 잘린다
+const PORTRAIT_VIDEO_X = 0.8;
+
 function CameraRig({ cameras }: { cameras: CameraFile["cameras"] }) {
   const { camera, size } = useThree();
   useEffect(() => {
-    const c = size.width >= size.height ? cameras.landscape : cameras.portrait;
+    const portrait = size.width < size.height;
+    const c = portrait ? cameras.portrait : cameras.landscape;
     const cam = camera as THREE.PerspectiveCamera;
     cam.position.fromArray(c.position);
     cam.quaternion.fromArray(c.quaternion);
     cam.fov = c.fov_y_degrees;
     cam.near = c.near;
     cam.far = c.far;
+    // 영상이 오른쪽으로 옮겨 잘린 만큼 카메라 화면도 같이 옮겨 점구름과 실사를 맞춘다
+    const videoWidth = (size.height * 9) / 16;
+    const shift = portrait ? Math.max(0, videoWidth - size.width) * (PORTRAIT_VIDEO_X - 0.5) : 0;
+    cam.setViewOffset(size.width, size.height, shift, 0, size.width, size.height);
     cam.updateProjectionMatrix();
   }, [camera, size, cameras]);
   return null;

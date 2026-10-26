@@ -135,7 +135,7 @@ export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
           preload="metadata"
           poster="/video/hero-poster.webp"
           aria-hidden
-          className="absolute inset-0 size-full object-cover"
+          className="absolute inset-0 size-full object-cover portrait:object-[80%_50%]"
           style={{ clipPath: `inset(${frame.scanY * 100}% 0 0 0)` }}
         >
           <source media="(orientation: portrait)" src="/video/hero-portrait.webm" type="video/webm" />
