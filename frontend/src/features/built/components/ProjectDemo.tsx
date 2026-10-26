@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 // 녹화가 있는 프로젝트 — 파일: public/video/projects/{slug}.webm|.mp4|-poster.webp
-const DEMO_SLUGS = new Set(["metabole", "life-tutorial", "localhost-daegu", "remakeday"]);
+const DEMO_SLUGS = new Set(["metabole", "life-tutorial", "localhost-daegu", "townpulse", "remakeday"]);
 
 // 지시서 §2 04: 동작 녹화는 뷰포트에 들어왔을 때만 재생
 export function ProjectDemo({ slug, title }: { slug: string; title: string }) {

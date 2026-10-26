@@ -11,8 +11,8 @@ import { CountUpText } from "@/shared/ui/CountUpText";
 import { ScanProgress } from "@/shared/ui/ScanProgress";
 
 import { useProfile } from "../hooks/useProfile";
-import { useScanEnabled } from "../hooks/useScanEnabled";
-import { useSectionProgress } from "../hooks/useSectionProgress";
+import { useScanEnabled } from "@/shared/motion/useScanEnabled";
+import { useSectionProgress } from "@/shared/motion/useSectionProgress";
 import { CHART_HOLD, heroFrame } from "../lib/heroTimeline";
 import type { CameraFile } from "./HeroCanvas";
 
@@ -26,6 +26,9 @@ const LABELS = [
   { text: "정지사유: 포장재 교체", x: "66%", y: 0.56 },
   { text: "p95 412ms", x: "22%", y: 0.66 },
 ];
+
+// "스캔 시작" 자동 스크롤 시간 — 스캔부터 차트 완성까지 한 번에 보이는 길이
+const SCAN_SCROLL_MS = 4200;
 
 // 지시서 §2 HERO 65% 카운터 4개
 const COUNTER_METRIC_IDS = ["translate-claims", "hero-staff", "hero-capacity", "metabole-rps"];
@@ -65,11 +68,31 @@ export function HeroSection() {
     }
   }, [frame.playing]);
 
+  // "스캔 시작": 스캔→점구름→라벨→차트가 차례로 보이게 천천히 차트 고정 지점까지 내려간다.
+  // 사용자가 직접 스크롤하면 즉시 멈추고 넘긴다. 애니메이션 동안만 scroll-snap을 끈다(프레임마다 붙잡히지 않게).
   const startScan = (e: MouseEvent<HTMLAnchorElement>) => {
     const el = ref.current;
     if (!scan || !el) return;
     e.preventDefault();
-    window.scrollTo({ top: el.offsetTop + (el.offsetHeight - window.innerHeight) * 0.42, behavior: "smooth" });
+    const from = window.scrollY;
+    const to = el.offsetTop + (el.offsetHeight - window.innerHeight) * CHART_HOLD.snap;
+    const root = document.documentElement;
+    const start = performance.now();
+    let frame = 0;
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      root.style.scrollSnapType = "";
+      ["wheel", "touchstart", "keydown"].forEach((ev) => window.removeEventListener(ev, stop));
+    };
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / SCAN_SCROLL_MS);
+      window.scrollTo(0, from + (to - from) * (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2));
+      if (t < 1) frame = requestAnimationFrame(step);
+      else stop();
+    };
+    root.style.scrollSnapType = "none";
+    ["wheel", "touchstart", "keydown"].forEach((ev) => window.addEventListener(ev, stop, { passive: true }));
+    frame = requestAnimationFrame(step);
   };
 
   const counters = COUNTER_METRIC_IDS.map((id) => metrics.get(id)).filter((m): m is Metric => !!m);

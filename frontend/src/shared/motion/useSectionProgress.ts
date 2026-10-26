@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
 
 // 섹션이 화면 위로 지나간 비율(0~1). sticky 고정 구간 = 섹션 높이 - 화면 높이
