@@ -1,3 +1,13 @@
+## [v0.5.6] - 2026-10-26
+
+### Added
+- Vercel 중계 `/api/v1/[resource]`: 공개 데이터 8종의 GET만 집 서버로 넘김(그 외 404 `RESOURCE_NOT_FOUND`, 집 서버 장애 502 `UPSTREAM_UNAVAILABLE`), Vercel CDN 캐시 `s-maxage=60` + 테스트. api.chungsik.com을 Cloudflare Access로 잠그기 위한 준비
+- `shared/api/upstream.ts`: 서버 전용 집 서버 호출 — env `API_ORIGIN` + Cloudflare Access 서비스 토큰 헤더(`CF_ACCESS_CLIENT_ID/SECRET`, 브라우저 번들에 안 들어감)
+
+### Changed
+- HERO 서버 미리 불러오기는 중계를 거치지 않고 `upstreamFetch`로 집 서버를 직접 부름(LCP 유지). `API_ORIGIN`이 없으면(로컬 mock) 이전처럼 브라우저에서 불러옴
+- 운영 전환은 Vercel env로만: `NEXT_PUBLIC_API_BASE=/api/v1` + `API_ORIGIN`·`CF_ACCESS_*` (코드 기본값 `/api/mock`은 그대로)
+
 ## [v0.5.5] - 2026-10-26
 
 ### Added

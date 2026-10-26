@@ -58,3 +58,9 @@ services:
 
 volumes:
   pgdata:
+
+# 브리지 이름 고정 — ufw `deny in on br-chungsik`로 공개 컨테이너가 호스트(SSH·Ollama·OCR 등)에 닿지 못하게
+networks:
+  default:
+    driver_opts:
+      com.docker.network.bridge.name: br-chungsik
