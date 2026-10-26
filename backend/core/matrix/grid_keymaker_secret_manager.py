@@ -11,6 +11,8 @@ class Settings(BaseSettings):
 
     database_url: str
     cors_origins: str = "http://localhost:3700"
+    # 공개 서버(Tunnel 뒤 컨테이너)에서는 끈다 — /docs·/redoc·/openapi.json 비공개
+    docs_enabled: bool = True
 
 
 @lru_cache

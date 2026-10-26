@@ -1,3 +1,11 @@
+## [v0.3.9] - 2026-10-26
+
+### Changed
+- 공개 API(api.chungsik.com)에서 `/docs`·`/redoc`·`/openapi.json` 비공개: 설정 `docs_enabled`(기본 켬, 호스트 개발 서버는 그대로) + compose `backend`에 `DOCS_ENABLED: "false"` + 테스트
+
+### Removed
+- 예전 Docker 볼륨 `backend_chungsik-db-data`(구성 변경 전 것, 사용 컨테이너 없음)
+
 ## [v0.3.8] - 2026-10-26
 
 ### Added

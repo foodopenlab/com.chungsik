@@ -11,7 +11,8 @@ from apps.portfolio.adapter.inbound.api.v1.stack_router import router as stack_r
 from apps.portfolio.adapter.inbound.api.v1.term_router import router as term_router
 from core.matrix.grid_keymaker_secret_manager import get_settings
 
-app = FastAPI(title="com.chungsik")
+# openapi_url이 None이면 FastAPI는 /docs·/redoc도 만들지 않는다
+app = FastAPI(title="com.chungsik", openapi_url="/openapi.json" if get_settings().docs_enabled else None)
 
 app.add_middleware(
     CORSMiddleware,

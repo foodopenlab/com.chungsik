@@ -34,6 +34,7 @@ services:
     environment:
       # env_file보다 우선 — 컨테이너 내부(서비스명) 기준 주소
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      DOCS_ENABLED: "false"   # Tunnel로 공개되는 컨테이너 — API 문서 비공개
     ports:
       - "127.0.0.1:8700:8700"   # 로컬 전용 — 공개는 Tunnel로만
     healthcheck:
