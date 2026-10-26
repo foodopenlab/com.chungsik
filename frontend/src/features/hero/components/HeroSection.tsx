@@ -85,6 +85,19 @@ export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
     }
   }, [frame.playing]);
 
+  // <source media>는 처음 불러올 때만 고른다 — 세로로 연 뒤 가로로 넓히면 세로 영상이 확대돼 흐려지므로 방향이 바뀌면 다시 고른다
+  useEffect(() => {
+    const portrait = window.matchMedia("(orientation: portrait)");
+    const reselect = () => {
+      const v = video.current;
+      if (!v) return;
+      v.load();
+      if (frameRef.current.playing && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) v.play().catch(() => {});
+    };
+    portrait.addEventListener("change", reselect);
+    return () => portrait.removeEventListener("change", reselect);
+  }, []);
+
   // "스캔 시작": 스캔→점구름→라벨→차트가 차례로 보이게 천천히 차트 고정 지점까지 내려간다.
   // 사용자가 직접 스크롤하면 즉시 멈추고 넘긴다. 애니메이션 동안만 scroll-snap을 끈다(프레임마다 붙잡히지 않게).
   const startScan = (e: MouseEvent<HTMLAnchorElement>) => {
