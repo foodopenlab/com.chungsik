@@ -1,3 +1,8 @@
+## [v0.4.3] - 2026-10-26
+
+### Added
+- 공유 미리보기(OG·트위터 카드): `app/opengraph-image.jpg`(1200×630, HERO 첫 화면 캡처) + alt 텍스트, `metadataBase` https://www.chungsik.com, `og:title/description/url/site_name/locale`, `twitter:card=summary_large_image`
+
 ## [v0.4.2] - 2026-10-26
 
 ### Changed

@@ -15,9 +15,16 @@ const jetbrainsMono = JetBrains_Mono({
 // 01 GAP 현장 말투 손글씨. 한글 글리프가 커서 미리 로드하지 않는다.
 const gaegu = Gaegu({ variable: "--font-gaegu", subsets: ["latin"], weight: ["400"], preload: false });
 
+const TITLE = "김충식 — 현장의 말을 개발의 말로";
+const DESCRIPTION = "식품기술사 · 현장 10년 5개월 · Forward Deployed Engineer";
+
+// og:image는 app/opengraph-image.jpg 파일 규약으로 자동 연결된다
 export const metadata: Metadata = {
-  title: "김충식 — 현장의 말을 개발의 말로",
-  description: "식품기술사 · 현장 10년 5개월 · Forward Deployed Engineer",
+  metadataBase: new URL("https://www.chungsik.com"),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "/", siteName: "김충식 포트폴리오", locale: "ko_KR", type: "website" },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
