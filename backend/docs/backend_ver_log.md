@@ -1,3 +1,12 @@
+## [v0.3.8] - 2026-10-26
+
+### Added
+- `education` 테이블 + 프랙탈 11-File Set(`/api/v1/educations`, `/myself` 포함) + 라우터 테스트. `profile` FK로 ERD에 연결
+- 마이그레이션 `0010`: 테이블 생성 + 시드 1행(IBM × RedHat AI Transformation Academy, AX 과정 7기, 2026-04-29 ~ 2026-10-27, 수료)
+
+### Changed
+- `0010`: `profile.subtitle`을 두 줄로 — 1줄 식품 경력(식품기술사·식품 현장 10년 5개월), 2줄 개발 이력(AX 아카데미 7기·해커톤 고용노동부장관상). 현장 경력과 개발 이력을 섞어 읽지 않게 함(downgrade로 원복)
+
 ## [v0.3.7] - 2026-10-26
 
 ### Changed

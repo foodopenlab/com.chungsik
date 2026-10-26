@@ -16,7 +16,8 @@ const jetbrainsMono = JetBrains_Mono({
 const gaegu = Gaegu({ variable: "--font-gaegu", subsets: ["latin"], weight: ["400"], preload: false });
 
 const TITLE = "김충식 — 현장의 말을 개발의 말로";
-const DESCRIPTION = "식품기술사 · 현장 10년 5개월 · Forward Deployed Engineer";
+// 현장 10년 5개월은 식품 경력, 개발은 AX 아카데미에서 — 둘을 섞어 읽지 않게(HERO 부제와 같은 내용)
+const DESCRIPTION = "식품기술사 · 식품 현장 10년 5개월 · 개발: IBM × RedHat AX 아카데미 7기 · 해커톤 고용노동부장관상";
 
 // og:image는 app/opengraph-image.jpg 파일 규약으로 자동 연결된다
 export const metadata: Metadata = {

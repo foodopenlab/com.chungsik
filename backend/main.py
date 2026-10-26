@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from apps.portfolio.adapter.inbound.api.v1.education_router import router as education_router
 from apps.portfolio.adapter.inbound.api.v1.metric_router import router as metric_router
 from apps.portfolio.adapter.inbound.api.v1.profile_router import router as profile_router
 from apps.portfolio.adapter.inbound.api.v1.project_router import router as project_router
@@ -25,3 +26,4 @@ app.include_router(project_router)
 app.include_router(project_stack_router)
 app.include_router(metric_router)
 app.include_router(term_router)
+app.include_router(education_router)

@@ -196,7 +196,7 @@ export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
           <h1 id="hero-title" className="max-w-[16ch] text-4xl leading-tight font-bold break-keep md:text-[72px]">
             {profile?.headline}
           </h1>
-          <p className="mt-6 text-lg text-[var(--text)]/80 break-keep md:text-xl">{profile?.subtitle}</p>
+          <p className="mt-6 text-lg whitespace-pre-line text-[var(--text)]/80 break-keep md:text-xl">{profile?.subtitle}</p>
           <nav className="mt-10 flex flex-wrap gap-3" aria-label="바로가기">
             <a href="#gap" onClick={startScan} className="border border-[var(--scan)] px-5 py-3 text-sm text-[var(--scan)]">
               스캔 시작 ↓

@@ -1,3 +1,13 @@
+## [v0.5.5] - 2026-10-26
+
+### Added
+- 04 BUILT 제목 아래 교육 블록(`EducationBlock`): 기간·과정명·기관·설명 + "아래 프로젝트 N개는 모두 이 과정에서 팀으로 만들었습니다"(N은 프로젝트 수). `/educations` API·`useEducations` 훅
+- mock `/api/mock/educations` + 계약 테스트, `Education` 타입·픽스처
+
+### Changed
+- HERO 부제를 두 줄로 표시(`whitespace-pre-line`) — 1줄 식품 경력, 2줄 개발 이력. mock 픽스처도 백엔드 `0010`과 같게
+- OG·메타 설명을 같은 내용으로("식품 현장 10년 5개월", "개발: IBM × RedHat AX 아카데미 7기")
+
 ## [v0.5.4] - 2026-10-26
 
 ### Fixed

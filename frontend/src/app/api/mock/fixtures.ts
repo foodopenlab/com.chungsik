@@ -1,5 +1,5 @@
 // 서버 전용 — mock 라우트만 import한다. 실 API 시드(backend/alembic/versions/0001_stack.py)와 같은 데이터.
-import type { Profile, Stack, StackCategory, Term } from "@/shared/api/types";
+import type { Education, Profile, Stack, StackCategory, Term } from "@/shared/api/types";
 
 const CATEGORIES: [string, string][] = [
   ["frontend", "프론트엔드·웹 화면"],
@@ -173,7 +173,21 @@ export const profiles: Profile[] = [
     id: 1,
     name: "김충식",
     headline: "현장의 말을 개발의 말로 옮깁니다.",
-    subtitle: "김충식 · 식품기술사 · 현장 10년 5개월 · Forward Deployed Engineer",
+    subtitle:
+      "김충식 · 식품기술사 · 식품 현장 10년 5개월\n개발: IBM × RedHat AX 아카데미 7기(2026.04~10) · 해커톤 고용노동부장관상",
+  },
+];
+
+export const educations: Education[] = [
+  {
+    id: 1,
+    title: "IBM × RedHat AI Transformation Academy",
+    organization: "대한상공회의소 · 하이미디어 강남 AI 캠퍼스",
+    description: "AI 트랜스포메이션(AX) 과정 7기. Python부터 AI 서비스 설계·배포·운영까지",
+    startedOn: "2026-04-29",
+    endedOn: "2026-10-27",
+    status: "수료",
+    sortOrder: 1,
   },
 ];
 

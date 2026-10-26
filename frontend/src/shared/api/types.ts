@@ -48,3 +48,14 @@ export type Metric = {
 export type Term = { id: number; field: string; dev: string; note: string | null; sortOrder: number };
 
 export type Profile = { id: number; name: string; headline: string; subtitle: string };
+
+export type Education = {
+  id: number;
+  title: string;
+  organization: string;
+  description: string;
+  startedOn: string;
+  endedOn: string;
+  status: string;
+  sortOrder: number;
+};

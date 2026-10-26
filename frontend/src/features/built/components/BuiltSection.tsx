@@ -6,6 +6,7 @@ import { ScanReveal } from "@/shared/ui/ScanReveal";
 
 import { useActiveSlug } from "../hooks/useActiveSlug";
 import { useProjectViews } from "../hooks/useProjectViews";
+import { EducationBlock } from "./EducationBlock";
 import { ProjectBlock } from "./ProjectBlock";
 
 export function BuiltSection() {
@@ -22,6 +23,7 @@ export function BuiltSection() {
         <h2 id="built-title" className="mt-4 text-3xl font-bold md:text-[44px]">
           만든 것
         </h2>
+        <EducationBlock projectCount={views.length} />
 
         {isError && <p className="mt-12 text-[var(--muted)]">프로젝트를 불러오지 못했습니다.</p>}
 

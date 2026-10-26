@@ -1,0 +1,14 @@
+from dataclasses import dataclass
+from datetime import date
+
+
+@dataclass(frozen=True)
+class EducationEntity:
+    id: int
+    title: str
+    organization: str
+    description: str
+    started_on: date
+    ended_on: date
+    status: str
+    sort_order: int
