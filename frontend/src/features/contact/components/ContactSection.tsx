@@ -23,13 +23,15 @@ const DOCS = [
 export function ContactSection() {
   const metrics = useMetricsById();
   const teach = TEACH_METRIC_IDS.map((id) => metrics.get(id)).filter((m): m is Metric => !!m);
+  // 제목의 연수는 카운터와 같은 metric에서 — 숫자는 컴포넌트에 직접 쓰지 않는다
+  const years = metrics.get("teach-ncs-years")?.value;
 
   return (
     <ScanReveal>
       <section id="contact" aria-labelledby="contact-title" className="mx-auto max-w-[1280px] px-4 py-24 md:px-10">
         <p className="font-mono text-[13px] tracking-[0.2em] text-[var(--data)]">07 / TEACH + CONTACT</p>
         <h2 id="contact-title" className="mt-4 text-3xl font-bold break-keep md:text-[44px]">
-          가르치고, 연락받습니다
+          가르친 {years ?? "시간"}, 그리고 연락처
         </h2>
 
         <dl className="mt-12 grid gap-8 sm:grid-cols-3">
