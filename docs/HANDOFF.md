@@ -117,7 +117,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
    - 2단계(사용자) Zero Trust 서비스 토큰 `vercel-chungsik` 발급 → 3단계(사용자) Vercel env `API_ORIGIN`·`CF_ACCESS_*`(Sensitive) 추가, `NEXT_PUBLIC_API_BASE=/api/v1`, Production+Preview, Redeploy → 4단계 확인 → 5단계(사용자) Access 앱 `chungsik-api`(api.chungsik.com, 정책 Action `Service Auth` + 서비스 토큰) → 6단계 직접 호출 403 확인
    - **순서 중요**: 5단계(자물쇠)는 4단계 확인 뒤. 되돌리기 = Access 앱 삭제
    - 완료 후 CLAUDE.md·AGENTS.md Part VII "NEXT_PUBLIC_API_BASE에 Tunnel 공개 주소" 문구 갱신 필요
-   - 서버 격리: chungsik 네트워크 브리지 `br-chungsik` 고정. 사용자가 `sudo ufw insert 1 deny in on br-chungsik` 넣으면 컨테이너 → 호스트(22·8900·11434) 차단 확인
+   - 서버 격리 ✅(2026-10-26): 브리지 `br-chungsik` 고정 + ufw 1번 규칙 `deny in on br-chungsik` → 컨테이너에서 호스트 SSH·OCR·Ollama·다른 프로젝트 DB 차단 확인(`backend/docs/deploy.md` 서버 격리). SSH 비밀번호 로그인 끄기는 사용자 선택
 9. **적대적 리뷰** — "채용 담당자로서 과장으로 보이는 지점 5개, 팀 성과를 개인처럼 쓴 곳, 면접에서 바로 물을 약점"
 10. **소소한 것** — 상단 진행 바는 페이지 끝에서 100%(지시서는 06 도달 시 100%) · 숫자 고정폭 글꼴 공백(`15건  미만`) · 02 ④ 계산 격자 점이 흐리면 간격·크기 키우기
 

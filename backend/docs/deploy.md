@@ -33,3 +33,14 @@ curl --fail --silent --show-error http://127.0.0.1:8700/api/v1/stacks
 - DB 데이터는 `chungsik_pgdata` 볼륨. 데이터는 전부 마이그레이션 시드라 빈 볼륨에서도 `upgrade head`로 같은 상태가 됩니다. `docker compose down -v`는 실행하지 않습니다.
 - 새 마이그레이션 반영: `docker compose up -d --build backend` (시작 시 `alembic upgrade head`)
 - 호스트에서 uvicorn으로 개발할 때는 운영 컨테이너가 8700을 쓰므로 다른 포트를 씁니다: `cd backend && .venv/bin/uvicorn main:app --port 8701`
+
+## 서버 격리 (같은 서버의 다른 프로젝트 보호)
+
+공개되는 컨테이너는 chungsik뿐이라, 이 컨테이너가 뚫려도 서버 본체·다른 프로젝트에 닿지 못하게 막아 둡니다.
+
+- compose 네트워크 브리지 이름을 `br-chungsik`으로 고정(`docker-compose.yml` 맨 아래)
+- 서버 방화벽 맨 앞 규칙(사용자가 sudo로 1회 설정, 2026-10-26):
+  `sudo ufw insert 1 deny in on br-chungsik comment 'chungsik public containers -> host blocked'`
+- 확인 결과(chungsik-api 안에서 연결 시도): 호스트 SSH(22)·OCR(8900)·Ollama(11434)·다른 프로젝트 DB 모두 막힘, 자기 DB(`db:5432`)·공개 API는 정상
+- 되돌리기: `sudo ufw status numbered`로 번호 확인 후 `sudo ufw delete <번호>`
+- 컨테이너 사용자: api `app`(uid 10001), db `postgres`, cloudflared uid 65532 — root 아님. 포트는 모두 `127.0.0.1`에만 엶

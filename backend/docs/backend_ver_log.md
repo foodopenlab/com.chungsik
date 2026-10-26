@@ -3,6 +3,7 @@
 ### Changed
 - 공개 API(api.chungsik.com)에서 `/docs`·`/redoc`·`/openapi.json` 비공개: 설정 `docs_enabled`(기본 켬, 호스트 개발 서버는 그대로) + compose `backend`에 `DOCS_ENABLED: "false"` + 테스트
 - compose 기본 네트워크 브리지 이름을 `br-chungsik`으로 고정 — ufw `deny in on br-chungsik`로 공개 컨테이너가 호스트(SSH·Ollama·OCR 등)에 닿지 못하게 하기 위함
+- `docs/deploy.md`에 서버 격리 절차·확인 결과 추가(ufw 규칙 적용 후 컨테이너 → 호스트 22·8900·11434 차단 확인)
 
 ### Removed
 - 예전 Docker 볼륨 `backend_chungsik-db-data`(구성 변경 전 것, 사용 컨테이너 없음)
