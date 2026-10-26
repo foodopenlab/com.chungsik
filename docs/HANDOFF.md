@@ -118,7 +118,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
    - Cloudflare Zero Trust: 서비스 토큰 `vercel-chungsik`(만료 없음), Access 앱 `chungsik-api`(api.chungsik.com 전체) + 정책 `vercel only`(Action Service Auth, Include Service Token). 토큰 없이 직접 호출 → 403 확인
    - 되돌리기: Access 앱 삭제(즉시) / 중계를 끄려면 `NEXT_PUBLIC_API_BASE`를 Tunnel 주소로 + Redeploy(단, Access가 켜져 있으면 브라우저 직접 호출은 403)
    - 서버 격리 ✅: 브리지 `br-chungsik` + ufw 1번 `deny in on br-chungsik` → 컨테이너에서 호스트 SSH·OCR·Ollama·다른 프로젝트 DB 차단(`backend/docs/deploy.md` 서버 격리). SSH 비밀번호 로그인 끄기는 사용자 선택
-   - Lighthouse 재확인(2026-10-27): 운영 모바일 10회 중앙값 98(98~99 6회, 75~86 4회). 로컬 A/B(중계 전 `f5b5285` vs 지금)는 같음 → 중계 영향 없음. 느린 회차 원인 = Pretendard 분할 폰트 26개(574KB)가 첫 페인트 전에 끝난 회차마다 Lighthouse가 LCP 의존으로 계산(실제 브라우저 LCP는 느린 휴대폰 조건 1.4초로 일정). v0.5.8에서 서브셋 1개(110KB, Scan Sans)로 바꿔 로컬 70 → 87. **배포 후 운영 10회 재측정 필요**
+   - Lighthouse 재확인(2026-10-27): 운영 모바일 10회 중앙값 98(98~99 6회, 75~86 4회). 로컬 A/B(중계 전 `f5b5285` vs 지금)는 같음 → 중계 영향 없음. 느린 회차 원인 = Pretendard 분할 폰트 26개(574KB)가 첫 페인트 전에 끝난 회차마다 Lighthouse가 LCP 의존으로 계산(실제 브라우저 LCP는 느린 휴대폰 조건 1.4초로 일정). v0.5.8에서 서브셋 1개(110KB, Scan Sans)로 바꿔 로컬 70 → 87. 운영 10회: 74·99·94·95·95·98·94·90·94·100(중앙값 94.5) — 미리 받기(preload) 때문에 글꼴이 매번 계산에 들어감 → v0.5.9에서 preload 끔. **배포 후 운영 10회 재측정 필요**. 74 회차는 실측 첫 페인트가 1.3초로 늦어 HERO 영상(1.9MB)까지 계산된 일회성
    - 남은 관찰: 아래쪽 섹션 영상 포스터(translate·closing, 약 630KB)가 첫 화면에서 바로 받아짐 — 필요하면 화면 근처에서 포스터를 붙이는 방식 검토
 8-2. **중계 요청 속도 제한(Vercel 방화벽)** — 진행 중(2026-10-26 결정)
    - 이유: 중계 주소를 반복 호출하는 부하 대비. `?쿼리`로 캐시를 건너뛰던 구멍은 v0.5.7에서 막음(404). 남은 대비책으로 IP당 요청 수 제한
@@ -133,7 +133,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 - 실 API와 mock은 같은 데이터여야 한다. **새 Alembic 마이그레이션**(`backend/alembic/versions/00NN_*.py`, downgrade 포함)과 `frontend/src/app/api/mock/fixtures.ts`·`fixtures.built.ts`를 **함께** 고친 뒤 §6 mock=실 API 비교
 - 글자 추가 = `frontend/src/styles/fonts/scanSans.test.ts`가 실패하면 `bash frontend/scripts/subset-font.sh`로 서브셋 폰트 재생성(fonttools·brotli). 픽스처에 없는 글자는 폴백 글꼴로 보임
 - 숫자 추가 = `metric` 행 추가(측정 조건·출처·attribution 필수). 컴포넌트에 숫자를 직접 쓰지 않는다
-- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.9, 프론트 v0.5.8)
+- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.9, 프론트 v0.5.9)
 - 새 BC는 `backend/apps/dummy`를 복사해 시작
 
 ## 10. 자산·파일 위치

@@ -17,6 +17,8 @@ const scanSans = localFont({
   src: "../styles/fonts/ScanSans.woff2",
   variable: "--font-scan-sans",
   weight: "45 930",
+  // 미리 받으면 첫 페인트 전에 항상 끝나 Lighthouse가 LCP 의존으로 계산한다(측정: 중앙값 98 → 94.5). 제목은 swap으로 먼저 그려진다
+  preload: false,
 });
 
 // 01 GAP 현장 말투 손글씨. 한글 글리프가 커서 미리 로드하지 않는다.
