@@ -6,6 +6,8 @@ import { AttributionBadge } from "@/shared/ui/AttributionBadge";
 import { CountUpText } from "@/shared/ui/CountUpText";
 import { ScanReveal } from "@/shared/ui/ScanReveal";
 
+import { ClosingPlate } from "./ClosingPlate";
+
 const TEACH_METRIC_IDS = ["teach-ncs-years", "teach-satisfaction", "teach-youtube-reviews"];
 
 const EMAIL = "kcs8815@gmail.com";
@@ -67,14 +69,7 @@ export function ContactSection() {
           </ul>
         </nav>
 
-        <div className="relative mt-24 flex aspect-[21/9] items-end overflow-hidden border border-[var(--line)]">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url(/video/closing-poster.webp)" }}
-            aria-hidden
-          />
-          <p className="relative p-6 font-mono text-sm text-[var(--text)]">영상은 연출, 숫자는 실측.</p>
-        </div>
+        <ClosingPlate />
       </section>
     </ScanReveal>
   );

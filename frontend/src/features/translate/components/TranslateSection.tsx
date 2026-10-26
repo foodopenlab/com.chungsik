@@ -16,7 +16,7 @@ export function TranslateSection() {
 
   return (
     <ScanReveal>
-      <section aria-labelledby="translate-title" className="py-24">
+      <section id="translate" aria-labelledby="translate-title" className="py-24">
         <div className="mx-auto max-w-[1280px] px-4 md:px-10">
           <p className="font-mono text-[13px] tracking-[0.2em] text-[var(--data)]">02 / TRANSLATE</p>
           <h2 id="translate-title" className="mt-4 text-3xl font-bold break-keep md:text-[44px]">

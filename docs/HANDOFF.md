@@ -107,7 +107,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 1. ~~**OG·공유 메타**~~ — 완료(v0.4.3). 이미지 교체는 `frontend/src/app/opengraph-image.jpg`(1200×630)를 같은 이름으로 바꾸면 됨
 2. ~~**Lighthouse·모바일 점검**~~ — 완료(2026-10-26, 운영 URL). 모바일 성능 72→**98**(LCP 8.1→2.4s, CLS 0.084→0.001), 접근성·권장사항·SEO 100. 데스크톱 99. 모바일 HERO 차트 밀도·겹침·라벨 넘침은 v0.5.3에서 해결. 남은 관찰: 02 TRANSLATE는 3D 캔버스(`ssr:false`) 때문에 서버 HTML에서 빈자리
 3. **실제 휴대폰 확인** — 3D·영상·자석 정지·자동 스크롤
-4. **07 클로징 연출** — 스캔 라인이 한 번 더 지나가며 점구름 → 실사 복귀. CLOSING 영상 `public/video/closing.*` 준비됨(지금은 포스터 정지)
+4. ~~**07 클로징 연출**~~ — 완료(v0.6.0). 지시서의 점구름 단계는 빼고 스캔 라인 → CLOSING 실사 영상(사용자 선택, 3D 없이 가볍게). 상단 내비게이션도 함께 추가(HERO 지나면 나타남)
 5. **Metabole 상태 태그** — 10/27 밤 AWS 운영 종료 예정 → 이후 `배포 중 · 10/27 종료 예정`을 종료 표기로(새 마이그레이션 + `fixtures.built.ts`), 서비스 링크 처리도 결정
 6. **번역 오브젝트 텍스처 교체** — 임시본. `blender/textures/*.png`를 같은 이름으로 바꾸고 `blender -b --python blender/scripts/build_objects.py` → `public/models/obj-*.glb` 갱신
 7. **TownPulse 지도·AI 채팅 장면** — 로그인 필요라 공개 화면만 녹화됨. 사용자가 직접 녹화해 `frontend/public/video/raw/`에 넣으면 편집·압축·교체
@@ -133,7 +133,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 - 실 API와 mock은 같은 데이터여야 한다. **새 Alembic 마이그레이션**(`backend/alembic/versions/00NN_*.py`, downgrade 포함)과 `frontend/src/app/api/mock/fixtures.ts`·`fixtures.built.ts`를 **함께** 고친 뒤 §6 mock=실 API 비교
 - 글자 추가 = `frontend/src/styles/fonts/scanSans.test.ts`가 실패하면 `bash frontend/scripts/subset-font.sh`로 서브셋 폰트 재생성(fonttools·brotli). 픽스처에 없는 글자는 폴백 글꼴로 보임
 - 숫자 추가 = `metric` 행 추가(측정 조건·출처·attribution 필수). 컴포넌트에 숫자를 직접 쓰지 않는다
-- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.9, 프론트 v0.5.9)
+- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.9, 프론트 v0.6.0)
 - 새 BC는 `backend/apps/dummy`를 복사해 시작
 
 ## 10. 자산·파일 위치

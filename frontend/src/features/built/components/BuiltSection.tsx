@@ -18,7 +18,7 @@ export function BuiltSection() {
 
   return (
     <ScanReveal>
-      <section aria-labelledby="built-title" className="mx-auto max-w-[1280px] px-4 py-24 md:px-10">
+      <section id="built" aria-labelledby="built-title" className="mx-auto max-w-[1280px] px-4 py-24 md:px-10">
         <p className="font-mono text-[13px] tracking-[0.2em] text-[var(--data)]">04 / BUILT</p>
         <h2 id="built-title" className="mt-4 text-3xl font-bold md:text-[44px]">
           만든 것

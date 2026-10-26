@@ -12,6 +12,11 @@ html {
   scroll-snap-type: y proximity;
 }
 
+/* 상단 내비게이션(h-12) 링크로 이동하면 섹션 머리가 바에 가리지 않게 */
+section[id] {
+  scroll-margin-top: 3rem;
+}
+
 body {
   background: var(--bg);
   color: var(--text);

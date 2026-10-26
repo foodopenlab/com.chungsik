@@ -1,3 +1,14 @@
+## [v0.6.0] - 2026-10-27
+
+### Added
+- 상단 내비게이션(`features/nav/SiteNav`): HERO에서는 숨고 01부터 나타나 현재 섹션을 주황으로 강조(화면 45% 선 기준, `activeSection` + 테스트). 모바일은 가로로 밀리고 현재 항목이 바 안에 보이게 목록만 이동. 섹션 링크 이동 시 바에 가리지 않게 `section[id]` scroll-margin 3rem
+- 07 클로징 연출(`ClosingPlate`): 화면에 들어오면 스캔 라인이 1.8초 동안 내려가며 정지 화면이 CLOSING 실사 영상(카메라가 뒤로 빠짐)으로 바뀌고, 끝나면 캡션 "영상은 연출, 숫자는 실측."이 나타남. reduced-motion은 포스터 정지
+
+### Changed
+- 섹션 id 추가: `translate`·`built`·`dict`·`deploy`(내비게이션 링크용)
+- 클로징 포스터·영상은 화면 한 장 거리 안에 들어올 때만 받음(첫 화면 용량에서 제외)
+- `useInViewOnce`에 감지 범위(rootMargin) 옵션 — 기본값은 그대로
+
 ## [v0.5.9] - 2026-10-27
 
 ### Changed

@@ -50,7 +50,7 @@ export function DictSection() {
 
   return (
     <ScanReveal>
-      <section aria-labelledby="dict-title" className="mx-auto max-w-[1280px] px-4 py-24 md:px-10">
+      <section id="dict" aria-labelledby="dict-title" className="mx-auto max-w-[1280px] px-4 py-24 md:px-10">
         <p className="font-mono text-[13px] tracking-[0.2em] text-[var(--data)]">05 / DICT</p>
         <h2 id="dict-title" className="mt-4 text-3xl font-bold break-keep md:text-[44px]">
           현장 말과 개발 말을 오가는 사전

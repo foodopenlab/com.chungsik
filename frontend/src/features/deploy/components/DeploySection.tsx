@@ -17,7 +17,7 @@ const POC = ["HACCP 기록 점검", "표시사항·규제 검토 RAG", "클레�
 export function DeploySection() {
   return (
     <ScanReveal>
-      <section aria-labelledby="deploy-title" className="mx-auto max-w-[1280px] px-4 py-24 md:px-10">
+      <section id="deploy" aria-labelledby="deploy-title" className="mx-auto max-w-[1280px] px-4 py-24 md:px-10">
         <p className="font-mono text-[13px] tracking-[0.2em] text-[var(--data)]">06 / DEPLOY</p>
         <h2 id="deploy-title" className="mt-4 text-3xl font-bold break-keep md:text-[44px]">
           고객사에 가면 처음 30일
