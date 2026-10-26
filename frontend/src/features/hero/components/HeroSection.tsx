@@ -14,7 +14,7 @@ import { useProfile } from "../hooks/useProfile";
 import { useScanEnabled } from "@/shared/motion/useScanEnabled";
 import { useSectionProgress } from "@/shared/motion/useSectionProgress";
 import { CHART_HOLD, heroFrame } from "../lib/heroTimeline";
-import type { CameraFile } from "./HeroCanvas";
+import type { CameraFile, ChartBox } from "./HeroCanvas";
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
 
@@ -46,6 +46,8 @@ export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
   const frame = heroFrame(scan ? progress : 0);
   const frameRef = useRef(frame);
   const video = useRef<HTMLVideoElement>(null);
+  const counterList = useRef<HTMLDListElement>(null);
+  const chartBox = useRef<ChartBox | null>(null);
   const { data: cameraFile } = useApiQuery({
     queryKey: ["hero-cameras"],
     queryFn: () => fetch("/models/hero-cameras.json").then((r) => r.json() as Promise<CameraFile>),
@@ -55,6 +57,20 @@ export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
 
   useEffect(() => {
     frameRef.current = frame;
+  });
+
+  // 막대 차트는 카운터 목록 바로 아래, 카운터 글자 폭에 맞춰 모인다(카운터가 보일 때마다 다시 잰다)
+  useEffect(() => {
+    const dl = counterList.current;
+    if (!dl?.parentElement) return;
+    const base = dl.parentElement.getBoundingClientRect();
+    const r = dl.getBoundingClientRect();
+    const cs = getComputedStyle(dl);
+    chartBox.current = {
+      left: r.left - base.left + parseFloat(cs.paddingLeft),
+      right: r.right - base.left - parseFloat(cs.paddingRight),
+      top: r.bottom - base.top + 8,
+    };
   });
 
   // 0~15%는 실사 루프, 스캔이 시작되면 첫 프레임(카메라 매칭 기준)에 멈춘다. reduced-motion은 포스터에 정지.
@@ -128,7 +144,7 @@ export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
 
-        {scan && cameraFile && <HeroCanvas frame={frameRef} cameras={cameraFile.cameras} />}
+        {scan && cameraFile && <HeroCanvas frame={frameRef} chartBox={chartBox} cameras={cameraFile.cameras} />}
 
         {scanning && (
           <div
@@ -142,7 +158,7 @@ export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
           {LABELS.map((l) => (
             <li
               key={l.text}
-              className="absolute border border-[var(--data)] bg-[var(--bg)]/70 px-2 py-0.5 font-mono text-xs text-[var(--data)] transition-opacity duration-300 md:text-sm"
+              className="absolute border border-[var(--data)] bg-[var(--bg)]/70 px-2 py-0.5 font-mono text-xs whitespace-nowrap text-[var(--data)] transition-opacity duration-300 max-md:-translate-x-1/2 md:text-sm"
               style={{ left: l.x, top: `${l.y * 100}%`, opacity: frame.scanY >= l.y ? frame.labels : 0 }}
             >
               {l.text}
@@ -152,9 +168,9 @@ export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
 
         {/* 카드마다 라벨·숫자·조건 3행을 subgrid로 공유해 좌우 칸의 줄을 맞춘다 */}
         {frame.counters && (
-          <dl className="absolute inset-x-0 top-[7%] mx-auto grid max-w-[1280px] gap-x-16 px-4 sm:grid-cols-2 md:px-10">
+          <dl ref={counterList} className="absolute inset-x-0 top-[4%] mx-auto grid max-w-[1280px] gap-x-16 px-4 sm:grid-cols-2 md:top-[7%] md:px-10">
             {counters.map((m) => (
-              <div key={m.id} className="row-span-3 grid grid-rows-subgrid pb-8 md:pb-10">
+              <div key={m.id} className="row-span-3 grid grid-rows-subgrid pb-6 md:pb-10">
                 <dt className="flex items-center gap-2 self-end text-sm">
                   {m.label}
                   <AttributionBadge attribution={m.attribution} />

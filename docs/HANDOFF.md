@@ -105,7 +105,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 ## 8. 남은 작업 (우선순위 순)
 
 1. ~~**OG·공유 메타**~~ — 완료(v0.4.3). 이미지 교체는 `frontend/src/app/opengraph-image.jpg`(1200×630)를 같은 이름으로 바꾸면 됨
-2. ~~**Lighthouse·모바일 점검**~~ — 완료(2026-10-26, 운영 URL). 모바일 성능 72→**98**(LCP 8.1→2.4s, CLS 0.084→0.001), 접근성·권장사항·SEO 100. 데스크톱 99. 남은 관찰: 모바일 HERO 막대 차트 밀도가 고르지 않음(점 1/3 + 막대 폭 축소), 02 TRANSLATE는 3D 캔버스(`ssr:false`) 때문에 서버 HTML에서 빈자리
+2. ~~**Lighthouse·모바일 점검**~~ — 완료(2026-10-26, 운영 URL). 모바일 성능 72→**98**(LCP 8.1→2.4s, CLS 0.084→0.001), 접근성·권장사항·SEO 100. 데스크톱 99. 모바일 HERO 차트 밀도·겹침·라벨 넘침은 v0.5.3에서 해결. 남은 관찰: 02 TRANSLATE는 3D 캔버스(`ssr:false`) 때문에 서버 HTML에서 빈자리
 3. **실제 휴대폰 확인** — 3D·영상·자석 정지·자동 스크롤
 4. **07 클로징 연출** — 스캔 라인이 한 번 더 지나가며 점구름 → 실사 복귀. CLOSING 영상 `public/video/closing.*` 준비됨(지금은 포스터 정지)
 5. **Metabole 상태 태그** — 10/27 밤 AWS 운영 종료 예정 → 이후 `배포 중 · 10/27 종료 예정`을 종료 표기로(새 마이그레이션 + `fixtures.built.ts`), 서비스 링크 처리도 결정
@@ -119,7 +119,7 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
 
 - 실 API와 mock은 같은 데이터여야 한다. **새 Alembic 마이그레이션**(`backend/alembic/versions/00NN_*.py`, downgrade 포함)과 `frontend/src/app/api/mock/fixtures.ts`·`fixtures.built.ts`를 **함께** 고친 뒤 §6 mock=실 API 비교
 - 숫자 추가 = `metric` 행 추가(측정 조건·출처·attribution 필수). 컴포넌트에 숫자를 직접 쓰지 않는다
-- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.7, 프론트 v0.5.2)
+- 버전 로그: 백엔드 `backend/docs/backend_ver_log.md`, 프론트 `frontend/docs/frontend_ver_log.md` 맨 위에 기록(현재 백엔드 v0.3.7, 프론트 v0.5.3)
 - 새 BC는 `backend/apps/dummy`를 복사해 시작
 
 ## 10. 자산·파일 위치

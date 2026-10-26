@@ -1,3 +1,5 @@
+import { rng } from "@/shared/random/rng";
+
 // 02 TRANSLATE — 번역마다 점구름이 모일 차트 모양. 좌표는 화면 틀(가로 ±1, 세로 ±0.7) 기준.
 export type ChartKind = "pareto" | "timeline" | "rounds" | "split";
 
@@ -81,16 +83,6 @@ const SHAPES: Record<ChartKind, (n: number, rand: () => number) => Targets> = {
   rounds: (n, rand) => fillRects(bars(Array.from({ length: 10 }, (_, i) => 0.22 + 0.78 * (i / 9) ** 1.3)), n, rand),
   split: computeVsInterpret,
 };
-
-// 시드 고정 난수(mulberry32) — 매번 같은 모양
-function rng(seed: number) {
-  return () => {
-    seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
 
 export function chartTargets(kind: ChartKind, n: number): Targets {
   return SHAPES[kind](n, rng(7));
