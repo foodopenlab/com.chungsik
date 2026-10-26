@@ -118,7 +118,12 @@ scripts/gen_seed_0003.py   0003 시드 생성기(이후 변경은 새 마이그�
    - Cloudflare Zero Trust: 서비스 토큰 `vercel-chungsik`(만료 없음), Access 앱 `chungsik-api`(api.chungsik.com 전체) + 정책 `vercel only`(Action Service Auth, Include Service Token). 토큰 없이 직접 호출 → 403 확인
    - 되돌리기: Access 앱 삭제(즉시) / 중계를 끄려면 `NEXT_PUBLIC_API_BASE`를 Tunnel 주소로 + Redeploy(단, Access가 켜져 있으면 브라우저 직접 호출은 403)
    - 서버 격리 ✅: 브리지 `br-chungsik` + ufw 1번 `deny in on br-chungsik` → 컨테이너에서 호스트 SSH·OCR·Ollama·다른 프로젝트 DB 차단(`backend/docs/deploy.md` 서버 격리). SSH 비밀번호 로그인 끄기는 사용자 선택
-   - 관찰: 운영 모바일 Lighthouse 5회 99·79·97·76·97 — 느린 회차는 렌더 지연(약 3.9s, TTFB 10ms·HERO는 서버 HTML에 있음). 측정 변동으로 보이나 이전 98은 1회 측정이라 비교 근거 약함 → 소소한 것에서 재확인
+   - Lighthouse 재확인(2026-10-27): 운영 모바일 10회 중앙값 **98**(98~99 6회, 75~86 4회). 로컬 A/B(중계 전 `f5b5285` vs 지금, 각 5회)는 점수·LCP·TBT·렌더 지연이 사실상 같음 → **중계 영향 없음**. 느린 회차는 원래 있던 변동으로, LCP 요소 `h1#hero-title`의 렌더 지연(서버 응답·TBT는 정상)이 원인 — 개선하려면 HERO 제목이 JS 로드 전에 그려지는지부터 확인
+8-2. **중계 요청 속도 제한(Vercel 방화벽)** — 진행 중(2026-10-26 결정)
+   - 이유: 중계 주소를 반복 호출하는 부하 대비. `?쿼리`로 캐시를 건너뛰던 구멍은 v0.5.7에서 막음(404). 남은 대비책으로 IP당 요청 수 제한
+   - 이메일 인증(Cloudflare Access 사람 로그인)은 검토 후 제외: api.chungsik.com에 걸면 Vercel 서버가 코드를 못 받아 사이트 데이터가 끊기고, www에 걸면 모든 방문자(채용 담당자 포함)가 로그인해야 함. 캐시 우회 문제와도 무관(문제는 Vercel 캐시 단계, 토큰은 그 뒤 단계)
+   - 규칙(대시보드 Firewall) `api rate limit`: 경로가 `/api/v1/`로 시작 → Rate Limit, 고정 창 60초·IP당 100회(정상 방문 1회 = 요청 7개). www는 Cloudflare 회색 구름이라 Vercel 방화벽이 맞는 위치. 카운터는 리전별
+   - 2026-10-26 Log 모드로 게시, 이 서버에서 120회 보내 정확히 20회 기록 확인. **남은 일**: 하루 트래픽에 다른 IP가 없으면 Log → 429로 전환 후 120회 재시험(101번째부터 429)
 9. **적대적 리뷰** — "채용 담당자로서 과장으로 보이는 지점 5개, 팀 성과를 개인처럼 쓴 곳, 면접에서 바로 물을 약점"
 10. **소소한 것** — 상단 진행 바는 페이지 끝에서 100%(지시서는 06 도달 시 100%) · 숫자 고정폭 글꼴 공백(`15건  미만`) · 02 ④ 계산 격자 점이 흐리면 간격·크기 키우기
 
