@@ -1,0 +1,11 @@
+/* 디자인 토큰 단일 원천 — docs/portfolio-work-order-v2.md §1-1. 다크 전용. */
+:root {
+  --bg: #0b0f0e;
+  --bg-tile: #15191b;
+  --line: #22282a;
+  --scan: #ff6a39;
+  --data: #71c5e8;
+  --text: #f4efe4;
+  --muted: #8a918c;
+  --alert: #e5484d;
+}

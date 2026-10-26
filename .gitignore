@@ -1,0 +1,24 @@
+# 시크릿 (하위 디렉토리 포함)
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Blender 중간 산출물
+blender/renders/
+*.blend1
+
+# Python 캐시
+__pycache__/
+*.py[cod]
+
+# 비공개 출처·팀원 평가가 들어간 조사 문서 — 로컬 전용(공개 저장소)
+docs/project-facts.md
+
+# 비공개 기획 문서 (로컬 전용 — 공개 저장소)
+docs/portfolio-work-order-v2.md
+**/CODEX_TASK*.md
+blender/PLAN.md

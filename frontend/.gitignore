@@ -1,0 +1,23 @@
+# Node / Next.js
+node_modules/
+.next/
+out/
+build/
+coverage/
+next-env.d.ts
+*.tsbuildinfo
+npm-debug.log*
+
+# Flow 원본 영상 (압축본만 커밋)
+public/video/raw/
+
+# Vercel
+.vercel
+*.pem
+
+# 개인 자료(이력서 원본 등) — 커밋 금지
+docs/private/
+
+# 사이트에서 쓰지 않는 포스터 PNG (WebP로 대체). hero-poster.png·hero-portrait-poster.png는 Blender 기준 이미지라 유지
+public/video/closing-poster.png
+public/video/translate-*-poster.png

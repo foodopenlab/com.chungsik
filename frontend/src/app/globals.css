@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  --font-sans: "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-hand: var(--font-gaegu), cursive;
+}
+
+/* HERO 차트 고정 구간 자석(근처에서 멈출 때만 붙는 proximity — 스크롤 하이재킹 아님) */
+html {
+  scroll-snap-type: y proximity;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+/* 스캔 라인 — shared/ui/ScanReveal. --scan-y가 0→100%로 움직이며 위쪽(지나간 영역)만 마스크를 연다 */
+@property --scan-y {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+
+.scan-reveal {
+  --scan-y: 0%;
+  mask-image: linear-gradient(to bottom, black var(--scan-y), rgb(0 0 0 / 0.12) var(--scan-y));
+}
+
+.scan-reveal[data-scanned] {
+  animation: scan-sweep 0.9s ease-in-out forwards;
+}
+
+.scan-reveal-line {
+  position: absolute;
+  inset-inline: 0;
+  top: var(--scan-y);
+  height: 1px;
+  background: var(--scan);
+  box-shadow: 0 0 12px var(--scan);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scan-reveal[data-scanned] .scan-reveal-line {
+  animation: scan-line-fade 0.9s ease-in-out forwards;
+}
+
+@keyframes scan-sweep {
+  to {
+    --scan-y: 100%;
+  }
+}
+
+@keyframes scan-line-fade {
+  0%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-reveal {
+    mask-image: none;
+    animation: none !important;
+  }
+  .scan-reveal-line {
+    display: none;
+  }
+}
