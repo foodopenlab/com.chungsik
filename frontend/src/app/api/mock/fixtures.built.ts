@@ -233,9 +233,9 @@ const METRICS: [string, string | null, string, string, string, string, Metric["s
   [
     "life-tutorial-award",
     "life-tutorial",
-    "우수상",
-    "2026 제8회 K-디지털 트레이닝 해커톤",
-    "고용노동부장관상, 지정과제, 2026-09-04. 팀 수상",
+    "고용노동부장관상",
+    "해커톤 우수상",
+    "2026 제8회 K-디지털 트레이닝 · 지정과제 · 2026-09-04",
     "lifetutorial.beyondfacade.cloud/jekyll/intro/hackathon",
     "software",
     "team"
