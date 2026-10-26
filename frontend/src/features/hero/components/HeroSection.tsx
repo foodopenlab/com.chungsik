@@ -189,8 +189,9 @@ export function HeroSection({ serverProfile }: { serverProfile?: Profile }) {
           style={{ opacity: frame.title }}
           aria-hidden
         />
+        {/* 모바일은 세로 가운데 — 아래에 붙이면 화면(브라우저 바) 높이에 따라 버튼이 잘린다 */}
         <div
-          className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-[1280px] px-4 pb-20 md:px-10 md:pb-28"
+          className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-[1280px] px-4 max-md:top-1/2 max-md:bottom-auto max-md:-translate-y-1/2 md:px-10 md:pb-28"
           style={{ opacity: frame.title, pointerEvents: frame.title > 0.5 ? "auto" : "none" }}
         >
           <h1 id="hero-title" className="max-w-[16ch] text-4xl leading-tight font-bold break-keep md:text-[72px]">
