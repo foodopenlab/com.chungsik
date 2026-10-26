@@ -1,0 +1,59 @@
+# 개인 서버 운영 — backend/docs/deploy.md
+# 실행: docker compose up -d --build --wait   (Tunnel까지: --profile tunnel)
+name: chungsik
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: chungsik-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}       # 값은 루트 .env (gitignore)
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "127.0.0.1:5438:5432"   # 로컬 전용
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  backend:
+    build: ./backend
+    container_name: chungsik-api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./backend/.env
+    environment:
+      # env_file보다 우선 — 컨테이너 내부(서비스명) 기준 주소
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    ports:
+      - "127.0.0.1:8700:8700"   # 로컬 전용 — 공개는 Tunnel로만
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8700/api/v1/stack-categories/myself', timeout=3).close()"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # api.chungsik.com → backend:8700. 토큰은 Cloudflare 대시보드에서 발급해 루트 .env TUNNEL_TOKEN에
+  cloudflared:
+    profiles: ["tunnel"]
+    image: cloudflare/cloudflared:latest
+    container_name: chungsik-cloudflared
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN}
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  pgdata:

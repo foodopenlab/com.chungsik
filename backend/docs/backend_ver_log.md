@@ -1,3 +1,17 @@
+## [v0.3.6] - 2026-10-26
+
+### Changed
+- Docker 구성을 다른 프로젝트 규칙에 맞춤: `docker-compose.yml`을 저장소 루트로 이동(`name: chungsik`), 서비스 `backend`(`build: ./backend`, `env_file: ./backend/.env`), 컨테이너 `chungsik-db`·`chungsik-api`, 모두 `restart: unless-stopped`
+- 환경 파일 분리: compose 값(`POSTGRES_*`, `TUNNEL_TOKEN`)은 루트 `.env`, 앱 설정(`DATABASE_URL`, `CORS_ORIGINS`)은 `backend/.env` — 예시 파일 각각 갱신
+- DB 볼륨 `chungsik_pgdata`(마이그레이션 시드로 재생성, mock과 7개 엔드포인트 일치 확인)
+- `docs/deploy.md` 새 구성·Tunnel 절차로 다시 씀. 호스트 개발 uvicorn은 8701
+
+### Added
+- `cloudflared` 서비스(`--profile tunnel`, 토큰 방식) — api.chungsik.com → backend:8700
+
+### Removed
+- `backend/docker-compose.yml`, `api` 프로필
+
 ## [v0.3.5] - 2026-10-26
 
 ### Changed
