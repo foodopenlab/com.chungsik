@@ -11,6 +11,7 @@ def to_entity(orm: ProjectORM) -> ProjectEntity:
         role=orm.role,
         team_role=orm.team_role,
         status=orm.status,
+        award=orm.award,
         docs_url=orm.docs_url,
         github_url=orm.github_url,
         service_url=orm.service_url,

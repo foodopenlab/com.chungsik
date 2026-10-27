@@ -12,6 +12,7 @@ class ProjectSchema(BaseModel):
     role: str
     team_role: str
     status: str
+    award: str | None
     docs_url: str | None
     github_url: str | None
     service_url: str | None

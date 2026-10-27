@@ -433,7 +433,7 @@ frontend/src/
 
 ### 16. 스타일 — 토큰 기반, 다크 전용
 
-- 디자인 토큰은 `src/styles/tokens.css`가 단일 원천: `:root` 한 블록에 `--bg`, `--bg-tile`, `--line`, `--scan`, `--data`, `--text`, `--muted`, `--alert` (값은 `docs/portfolio-work-order-v2.md` §1-1).
+- 디자인 토큰은 `src/styles/tokens.css`가 단일 원천: `:root` 한 블록에 `--bg`, `--bg-tile`, `--line`, `--scan`, `--data`, `--text`, `--muted`, `--alert`, `--award`(수상 전용 금색) (값은 `docs/portfolio-work-order-v2.md` §1-1).
 - 컴포넌트는 토큰을 Tailwind arbitrary value로만 소비합니다: `bg-[var(--bg-tile)]`, `text-[var(--text)]`. **하드코딩 hex 금지** (예외: 데이터 시각화 팔레트 — UI 토큰과 별개 체계로 주석 선언).
 - Tailwind v4 CSS-first — `tailwind.config.*` 파일 없이 `globals.css`에서 `@import "tailwindcss"` + `tokens.css`.
 - 사이트는 다크 전용입니다. 라이트 테마·테마 전환·`data-theme` 속성을 두지 않습니다.

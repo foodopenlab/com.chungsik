@@ -10,6 +10,7 @@ const PROJECTS: Omit<Project, "sortOrder">[] = [
     "role": "팀장 — 방향·우선순위·일정 조율, 산출물과 최종 발표 총괄",
     "teamRole": "3인 팀 Beyond Facade(김충식·신채연·이은상). 프론트·백엔드를 개인별로 나누지 않아 아래 숫자는 모두 팀 성과입니다.",
     "status": "배포 중 · 10/27 종료 예정",
+    "award": "최우수상 · 과정 최종 프로젝트 1위",
     "docsUrl": "https://metabole.beyondfacade.cloud",
     "githubUrl": "https://github.com/beyondfacade/cloud.beyondfacade",
     "serviceUrl": "https://www.beyondfacade.cloud"
@@ -22,6 +23,7 @@ const PROJECTS: Omit<Project, "sortOrder">[] = [
     "role": "팀장 · PM · 전체 설계 — 사업 기획, 시스템 아키텍처, 퀘스트·판정 프롬프트 설계, 서류·발표 총괄",
     "teamRole": "3인 팀 BeyondFacade(이은상: 백엔드·RAG·판정 API / 신채연: 프론트·배틀·허브맵)",
     "status": "해커톤 수상 · API 중단",
+    "award": "해커톤 우수상",
     "docsUrl": "https://lifetutorial.beyondfacade.cloud",
     "githubUrl": null,
     "serviceUrl": "https://www.life-tutorial.com"
@@ -34,6 +36,7 @@ const PROJECTS: Omit<Project, "sortOrder">[] = [
     "role": "풀스택 — 기간 일치(지도 선택 연도 → AI 분석)와 AI 진행 표시를 백엔드부터 프론트까지, 백엔드 배포, 운영 주소 가상 고객 테스트",
     "teamRole": "3인 팀(장민석: 팀장·PM/아키텍트 / 류준: 풀스택·자금 점검 동선)",
     "status": "출품 · 배포 후 중단",
+    "award": null,
     "docsUrl": "https://053.localhostdaegu.cloud",
     "githubUrl": "https://github.com/localhostdaegu/cloud.localhostdaegu",
     "serviceUrl": "https://localhostdaegu.cloud"
@@ -46,6 +49,7 @@ const PROJECTS: Omit<Project, "sortOrder">[] = [
     "role": "팀장 · PM · 아키텍처 총괄 — 도메인 프랙탈 구조 설계·진화, 공공 API 검증",
     "teamRole": "3인 팀 Pulse Lab(이은상: 풀스택·QA / 신채연: 풀스택·해외 전략)",
     "status": "공모전 출품 · 데모 공개",
+    "award": null,
     "docsUrl": "https://townpulse.beyondfacade.cloud",
     "githubUrl": "https://github.com/beyondfacade/townpulse.beyondfacade.cloud-",
     "serviceUrl": "https://townpulse.site"
@@ -58,6 +62,7 @@ const PROJECTS: Omit<Project, "sortOrder">[] = [
     "role": "Scenario Director · Content — 시나리오 콘텐츠(인물·비트·진실 명제), 그림, 사운드(BGM·음성), 개발 허브 콘텐츠",
     "teamRole": "5인 팀(류준: 팀장·AI Agent / 장민석: AI 평가 / 신채연: 게임 프론트 / 이은상: QA·릴리스)",
     "status": "서비스 중 · 탐색적 관찰",
+    "award": null,
     "docsUrl": "https://blog.remakeday.com",
     "githubUrl": "https://github.com/remakeday/com.remakeday",
     "serviceUrl": "https://remakeday.com"
@@ -237,7 +242,7 @@ const METRICS: [string, string | null, string, string, string, string, Metric["s
     "해커톤 우수상",
     "2026 제8회 K-디지털 트레이닝 · 지정과제 · 2026-09-04",
     "lifetutorial.beyondfacade.cloud/jekyll/intro/hackathon",
-    "software",
+    "award",
     "team"
   ],
   [

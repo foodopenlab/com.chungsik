@@ -14,6 +14,7 @@ class ProjectORM(Base):
     role: Mapped[str] = mapped_column(Text)
     team_role: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String(32))
+    award: Mapped[str | None] = mapped_column(String(64))
     docs_url: Mapped[str | None] = mapped_column(String(255))
     github_url: Mapped[str | None] = mapped_column(String(255))
     service_url: Mapped[str | None] = mapped_column(String(255))

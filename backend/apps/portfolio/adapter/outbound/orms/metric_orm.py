@@ -7,7 +7,7 @@ from core.matrix.grid_oracle_database_manager import Base
 class MetricORM(Base):
     __tablename__ = "metric"
     __table_args__ = (
-        CheckConstraint("side IN ('field', 'software')", name="ck_metric_side"),
+        CheckConstraint("side IN ('field', 'software', 'award')", name="ck_metric_side"),
         CheckConstraint("attribution IN ('personal', 'team')", name="ck_metric_attribution"),
     )
 

@@ -22,3 +22,9 @@ def test_every_metric_is_marked_personal_or_team():
     items = client.get("/api/v1/metrics").json()["items"]
 
     assert items and {m["attribution"] for m in items} <= {"personal", "team"}
+
+
+def test_hackathon_award_metric_is_marked_as_award():
+    items = client.get("/api/v1/metrics").json()["items"]
+
+    assert [m["id"] for m in items if m["side"] == "award"] == ["life-tutorial-award"]

@@ -13,7 +13,7 @@ class MetricSchema(BaseModel):
     label: str
     condition: str
     source: str
-    side: Literal["field", "software"]
+    side: Literal["field", "software", "award"]
     attribution: Literal["personal", "team"]
     sort_order: int
 

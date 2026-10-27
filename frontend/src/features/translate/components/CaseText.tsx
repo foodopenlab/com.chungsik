@@ -9,6 +9,7 @@ import type { TranslateCase } from "../lib/cases";
 const SIDE_COLOR: Record<Metric["side"], string> = {
   field: "text-[var(--scan)]",
   software: "text-[var(--data)]",
+  award: "text-[var(--award)]",
 };
 
 // labels·result: 0~1 노출 정도. 정적 버전은 둘 다 1.

@@ -5,7 +5,7 @@ import type { Metric, Project } from "@/shared/api/types";
 import { buildProjectViews } from "./buildProjectViews";
 
 const project = (slug: string, sortOrder: number): Project => ({
-  slug, title: slug, problem: "", decision: "", role: "", teamRole: "", status: "",
+  slug, title: slug, problem: "", decision: "", role: "", teamRole: "", status: "", award: null,
   docsUrl: null, githubUrl: null, serviceUrl: null, sortOrder,
 });
 

@@ -16,7 +16,7 @@ class EducationRepository(EducationPort):
     def find_myself(self) -> EducationEntity:
         return EducationEntity(
             id=0, title="myself", organization="myself", description="myself",
-            started_on=date(2000, 1, 1), ended_on=date(2000, 1, 1), status="myself", sort_order=0,
+            started_on=date(2000, 1, 1), ended_on=date(2000, 1, 1), status="myself", award=None, sort_order=0,
         )
 
     def find_all(self) -> list[EducationEntity]:

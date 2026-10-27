@@ -11,4 +11,5 @@ class EducationEntity:
     started_on: date
     ended_on: date
     status: str
+    award: str | None
     sort_order: int

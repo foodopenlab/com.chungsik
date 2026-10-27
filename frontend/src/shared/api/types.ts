@@ -25,6 +25,7 @@ export type Project = {
   role: string;
   teamRole: string;
   status: string;
+  award: string | null;
   docsUrl: string | null;
   githubUrl: string | null;
   serviceUrl: string | null;
@@ -40,7 +41,7 @@ export type Metric = {
   label: string;
   condition: string;
   source: string;
-  side: "field" | "software";
+  side: "field" | "software" | "award";
   attribution: "personal" | "team";
   sortOrder: number;
 };
@@ -57,5 +58,6 @@ export type Education = {
   startedOn: string;
   endedOn: string;
   status: string;
+  award: string | null;
   sortOrder: number;
 };

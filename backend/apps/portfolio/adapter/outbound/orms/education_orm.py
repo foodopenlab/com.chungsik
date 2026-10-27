@@ -17,4 +17,5 @@ class EducationORM(Base):
     started_on: Mapped[date] = mapped_column(Date)
     ended_on: Mapped[date] = mapped_column(Date)
     status: Mapped[str] = mapped_column(String(16))
+    award: Mapped[str | None] = mapped_column(String(64))
     sort_order: Mapped[int] = mapped_column(Integer)

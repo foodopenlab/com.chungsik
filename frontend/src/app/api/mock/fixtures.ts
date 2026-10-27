@@ -187,6 +187,7 @@ export const educations: Education[] = [
     startedOn: "2026-04-29",
     endedOn: "2026-10-27",
     status: "수료",
+    award: "우수훈련생",
     sortOrder: 1,
   },
 ];

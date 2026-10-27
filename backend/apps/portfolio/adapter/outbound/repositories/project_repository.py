@@ -14,7 +14,7 @@ class ProjectRepository(ProjectPort):
     def find_myself(self) -> ProjectEntity:
         return ProjectEntity(
             slug="myself", title="myself", problem="", decision="", role="", team_role="",
-            status="", docs_url=None, github_url=None, service_url=None, sort_order=0,
+            status="", award=None, docs_url=None, github_url=None, service_url=None, sort_order=0,
         )
 
     def find_all(self) -> list[ProjectEntity]:

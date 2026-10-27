@@ -1,3 +1,13 @@
+## [v0.7.0] - 2026-10-27
+
+### Added
+- 금색 토큰 `--award`(#d9b45a) — 수상만 쓰는 색. 스캔 주황·데이터 하늘색과 섞이지 않게 노란 쪽
+- 수상 태그 `AwardTag`(금색 테두리): 교육 카드 "우수훈련생", Metabole "최우수상 · 과정 최종 프로젝트 1위", Life Tutorial "해커톤 우수상" — 회색 상태 태그 옆에 따로
+- Life Tutorial "해커톤 우수상" 지표 값(고용노동부장관상)을 금색으로(지표 `side: "award"`)
+
+### Changed
+- 타입: `Project.award`·`Education.award`(string | null), `Metric.side`에 `"award"` — mock 픽스처도 같은 내용(백엔드 0011)
+
 ## [v0.6.3] - 2026-10-27
 
 ### Fixed

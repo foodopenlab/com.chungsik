@@ -18,3 +18,9 @@ def test_list_returns_ax_academy_with_period():
     assert [(e["title"], e["startedOn"], e["endedOn"]) for e in items] == [
         ("IBM × RedHat AI Transformation Academy", "2026-04-29", "2026-10-27"),
     ]
+
+
+def test_ax_academy_shows_outstanding_trainee_award():
+    items = client.get("/api/v1/educations").json()["items"]
+
+    assert [e["award"] for e in items] == ["우수훈련생"]

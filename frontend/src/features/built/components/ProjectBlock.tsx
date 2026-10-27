@@ -5,11 +5,13 @@ import { AttributionBadge } from "@/shared/ui/AttributionBadge";
 import { CountUpText } from "@/shared/ui/CountUpText";
 
 import type { ProjectView } from "../lib/buildProjectViews";
+import { AwardTag } from "./AwardTag";
 import { ProjectDemo } from "./ProjectDemo";
 
 const SIDE_COLOR: Record<Metric["side"], string> = {
   field: "text-[var(--scan)]",
   software: "text-[var(--data)]",
+  award: "text-[var(--award)]",
 };
 
 function Label({ children }: { children: string }) {
@@ -33,6 +35,7 @@ export function ProjectBlock({ view, stacks }: { view: ProjectView; stacks: Stac
         <span className="border border-[var(--line)] px-2 py-0.5 font-mono text-xs text-[var(--muted)]">
           {project.status}
         </span>
+        <AwardTag award={project.award} />
       </div>
 
       <div className="mt-6 grid max-w-[64ch] gap-6 text-lg leading-[1.7]">

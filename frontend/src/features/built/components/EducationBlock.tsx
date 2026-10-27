@@ -1,6 +1,7 @@
 "use client";
 
 import { useEducations } from "../hooks/useEducations";
+import { AwardTag } from "./AwardTag";
 
 const dotted = (iso: string) => iso.replaceAll("-", ".");
 
@@ -13,6 +14,7 @@ export function EducationBlock({ projectCount }: { projectCount: number }) {
       <div className="flex flex-wrap items-center gap-3">
         <p className="font-mono text-xs tracking-[0.2em] text-[var(--muted)]">EDUCATION</p>
         <span className="border border-[var(--line)] px-2 py-0.5 font-mono text-xs text-[var(--muted)]">{e.status}</span>
+        <AwardTag award={e.award} />
       </div>
       <p className="mt-4 font-mono text-sm text-[var(--data)]">
         {dotted(e.startedOn)} – {dotted(e.endedOn)}

@@ -11,5 +11,6 @@ def to_entity(orm: EducationORM) -> EducationEntity:
         started_on=orm.started_on,
         ended_on=orm.ended_on,
         status=orm.status,
+        award=orm.award,
         sort_order=orm.sort_order,
     )

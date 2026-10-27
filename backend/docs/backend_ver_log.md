@@ -1,3 +1,10 @@
+## [v0.4.0] - 2026-10-27
+
+### Added
+- 수상 표시 칸 `award`(nullable): `project`·`education` 테이블과 각 11파일 세트(entity·dto·schema·orm·orm_mapper·myself) — 마이그레이션 `0011_awards`
+  - AX 아카데미 수료(2026-10-27): Metabole "최우수상 · 과정 최종 프로젝트 1위"(960시간 과정 최종 발표, 전체 팀 중 1위), 교육 "우수훈련생", Life Tutorial "해커톤 우수상"
+- 지표 `side`에 `award` 추가(체크 제약 교체) — Life Tutorial 해커톤 수상 지표를 `award`로. 화면에서 금색
+
 ## [v0.3.9] - 2026-10-26
 
 ### Changed
