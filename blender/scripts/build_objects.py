@@ -121,7 +121,8 @@ def crt():
 
 
 def bubble():
-    white=material('말풍선 무광 세라믹',(.92,.92,.9),rough=.93)
+    # 바탕색까지 텍스처에 담는다(bubble_texture.py) — 손글씨 대사 "AI가 다 / 해줬으면"
+    white=material('말풍선 손글씨 대사',(1,1,1),rough=.93,texture='bubble.png')
     # 하나의 닫힌 외곽선에 꼬리까지 포함한 압출 메쉬.
     outline=[]
     for i in range(96):
@@ -133,7 +134,9 @@ def bubble():
     n=len(outline)
     faces=[tuple(reversed(range(n))),tuple(range(n,2*n))]
     faces.extend((i,(i+1)%n,(i+1)%n+n,i+n) for i in range(n))
-    obj=surface('speech_bubble',verts,faces,[(0,0)]*len(verts),white)
+    # 앞뒤 면은 x·z 평면 투영 UV(텍스처와 같은 틀). 옆면은 가장자리 바탕색이 늘어나 보인다
+    uv=[((x+.24)/.48,(z-.005)/.33) for y in (-.024,.024) for x,z in outline]
+    obj=surface('speech_bubble',verts,faces,uv,white)
     mod=obj.modifiers.new('부드러운 가장자리','BEVEL'); mod.width=.012; mod.segments=5
     bpy.context.view_layer.objects.active=obj; bpy.ops.object.modifier_apply(modifier=mod.name)
 

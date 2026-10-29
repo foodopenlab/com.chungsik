@@ -114,7 +114,7 @@ GLB는 미터 단위 Y-up이며 별도 노드 변환이 없다. 바닥 중앙이
 - 클립보드: 폭 0.245m × 깊이 0.340m, 종이와 금속 클립 포함.
 - 도면: 원래 종이 0.594m × 0.420m, 두께 0.25mm. 약 230mm를 펼치고 나머지를 말았다.
 - CRT: 폭 0.400m × 깊이 0.420m × 높이 약 0.432m. 곡면 유리 화면·받침·통풍구 포함. 스피너는 정지 텍스처다.
-- 말풍선: 폭 0.480m × 깊이 0.048m × 높이 약 0.330m, 꼬리 포함 무광 흰색.
+- 말풍선: 폭 0.480m × 깊이 0.048m × 높이 약 0.330m, 꼬리 포함 무광 흰색. 앞면에 손글씨 대사 "AI가 다 / 해줬으면"(Gaegu, `textures/bubble.png` — `scripts/bubble_texture.py`, 프론트 `npm run build` 뒤 실행)
 
 `objects.blend`의 `obj-*` 컬렉션에서 `*_preview_placement` 부모는 비교 렌더용 배치다. 각 자식 메쉬의 로컬 원점과 실제 GLB 원점은 바닥 중앙이다. 상·하단 미리보기 복제본과 배경·조명은 GLB에 포함하지 않는다.
 
@@ -138,7 +138,7 @@ GLB는 미터 단위 Y-up이며 별도 노드 변환이 없다. 바닥 중앙이
 | `obj-clipboard.glb` | 110,388 | `obj-clipboard-points.glb` | 193,084 | 8,000 | 754 |
 | `obj-blueprint.glb` | 604,608 | `obj-blueprint-points.glb` | 193,084 | 8,000 | 5,432 |
 | `obj-crt.glb` | 510,672 | `obj-crt-points.glb` | 193,072 | 8,000 | 4,544 |
-| `obj-bubble.glb` | 291,172 | `obj-bubble-points.glb` | 193,096 | 8,000 | 2,684 |
+| `obj-bubble.glb` | 349,380 (2026-10-29 대사 텍스처) | `obj-bubble-points.glb` | 193,096 | 8,000 | 2,684 |
 
 | 기타 파일 | bytes |
 |---|---:|

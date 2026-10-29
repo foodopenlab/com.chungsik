@@ -15,6 +15,8 @@ export type TranslateCase = {
   tilt: number;
   yaw: number;
   roll: number;
+  // 화면 틀 안 크기(가장 긴 변) — 없으면 기본값. 밝은 오브젝트가 화면을 덮어 혼자 튀지 않게 줄일 때
+  fit?: number;
   // 차트가 완성되면 캔버스 위에 띄우는 라벨(x: 캔버스 가로 %)과 경계선
   chartLabels?: { text: string; x: number; side: "data" | "scan" }[];
   divider?: boolean;
@@ -72,6 +74,7 @@ export const CASES: TranslateCase[] = [
     tilt: 0,
     yaw: 0.25,
     roll: 0,
+    fit: 0.95,
     chartLabels: [
       { text: "계산 · 코드", x: 26, side: "data" },
       { text: "해석 · AI", x: 74, side: "scan" },

@@ -19,7 +19,7 @@ const cssColor = (name: string) =>
   new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue(name).trim());
 
 // 오브젝트 원본 좌표 → 화면 틀: 눕힌 오브젝트 세우기(tilt)·돌리기(yaw)·위아래 바로잡기(roll) → 중심 맞추기 → 크기 맞추기
-function fitMatrix(geometry: THREE.BufferGeometry, { tilt, yaw, roll }: Pick<TranslateCase, "tilt" | "yaw" | "roll">) {
+function fitMatrix(geometry: THREE.BufferGeometry, { tilt, yaw, roll, fit = FIT }: Pick<TranslateCase, "tilt" | "yaw" | "roll" | "fit">) {
   const rot = new THREE.Matrix4()
     .makeRotationX(tilt)
     .premultiply(new THREE.Matrix4().makeRotationY(yaw))
@@ -28,7 +28,7 @@ function fitMatrix(geometry: THREE.BufferGeometry, { tilt, yaw, roll }: Pick<Tra
   box.applyMatrix4(rot);
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
-  const scale = FIT / Math.max(size.x, size.y);
+  const scale = fit / Math.max(size.x, size.y);
   return new THREE.Matrix4().makeScale(scale, scale, scale).multiply(new THREE.Matrix4().makeTranslation(-center.x, -center.y, -center.z)).multiply(rot);
 }
 

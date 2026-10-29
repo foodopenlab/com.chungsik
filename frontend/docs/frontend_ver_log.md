@@ -1,3 +1,10 @@
+## [v0.7.1] - 2026-10-29
+
+### Changed
+- 02 TRANSLATE 04번 말풍선이 비어 있고 커서 어두운 배경에서 혼자 튀던 것
+  - 앞면에 손글씨 대사 "AI가 다 / 해줬으면"(Gaegu — 01 GAP 현장 말투와 같은 글꼴). 텍스처 `blender/textures/bubble.png`(`blender/scripts/bubble_texture.py`), 말풍선 모델에 앞면 평면 UV → `obj-bubble.glb` 291KB → 349KB. 점구름 파일은 그대로
+  - 말풍선만 화면 크기 1.25 → 0.95(`TranslateCase.fit`, 없으면 기본값)
+
 ## [v0.7.0] - 2026-10-27
 
 ### Added
