@@ -28,3 +28,9 @@ def test_hackathon_award_metric_is_marked_as_award():
     items = client.get("/api/v1/metrics").json()["items"]
 
     assert [m["id"] for m in items if m["side"] == "award"] == ["life-tutorial-award"]
+
+
+def test_teach_metrics_include_forestry_lectures_and_ep50():
+    items = {m["id"]: m for m in client.get("/api/v1/metrics").json()["items"]}
+
+    assert (items["teach-satisfaction"]["value"], items["teach-youtube-reviews"]["value"]) == ("4.3–5.0", "9편")

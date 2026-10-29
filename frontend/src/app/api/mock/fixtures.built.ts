@@ -388,20 +388,20 @@ const METRICS: [string, string | null, string, string, string, string, Metric["s
   [
     "teach-satisfaction",
     null,
-    "4.3–4.8",
+    "4.3–5.0",
     "강의 만족도(5점 만점)",
-    "과목별 — 품질관리 4.8 · 생성형 AI 활용 4.7 · 식품위생법규 4.6 · 식품기술사 4.5 · HACCP 팀장 4.3",
-    "본인 이력서(FDE·AX/DX PM)",
+    "과목별 — 한국임업진흥원: AI 활용 사업계획서 작성 5.0 · AI 활용 상세페이지·영상 제작 5.0 / 한국식품정보원: 품질관리 4.8 · 생성형 AI 활용 4.7 · 식품위생법규 4.6 · 식품기술사 4.5 · HACCP 팀장 4.3",
+    "본인 이력서(FDE·AX/DX PM) + 본인 제공(2026-10-29)",
     "field",
     "personal"
   ],
   [
     "teach-youtube-reviews",
     null,
-    "8편",
+    "9편",
     "유튜브 콘텐츠 대본 검수",
-    "한국식품정보원 콘텐츠 EP23~EP44 중 8편",
-    "본인 이력서(FDE·AX/DX PM)",
+    "한국식품정보원 콘텐츠 EP23~EP50 중 9편",
+    "본인 이력서(FDE·AX/DX PM) + 본인 제공(2026-10-29)",
     "field",
     "personal"
   ],
