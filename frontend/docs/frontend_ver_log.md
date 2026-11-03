@@ -1,3 +1,8 @@
+## [v0.8.0] - 2026-11-03
+
+### Added
+- 07 연락처: 이메일 아래 "운영 채널" 링크 — YouTube @foodopenlab, YouTube @TodayKoreaFood(미국 대상), Instagram @foodopenlab. 새 탭 열기, DOCS 링크와 같은 스타일. 위 "대본 검수 9편"(한국식품정보원)과 헷갈리지 않게 이름을 "운영 채널"로
+
 ## [v0.7.2] - 2026-10-29
 
 ### Changed
